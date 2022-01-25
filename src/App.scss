@@ -1,0 +1,11 @@
+@import './reset.scss';
+
+@font-face {
+  font-family: 'Gordita';
+  src: url(./font/gordita/Gordita-Regular.otf);
+}
+
+body {
+  font-family: Gordita;
+  padding: 30px 50px;
+}

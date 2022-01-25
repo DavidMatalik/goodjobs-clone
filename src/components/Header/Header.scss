@@ -1,0 +1,38 @@
+@import '../../mixins.scss';
+
+header {
+  display: flex;
+  justify-content: space-between;
+  font-size: 1rem;
+  font-weight: bolder;
+  margin-bottom: 100px;
+
+  @include respond('tablet') {
+  }
+
+  nav {
+    img {
+      width: 110px;
+    }
+
+    .header-jobs-link {
+      text-decoration: none;
+      color: black;
+      margin-left: 30px;
+    }
+
+    .header-jobs-link:hover {
+      text-decoration: underline;
+    }
+  }
+
+  .header-login {
+    text-decoration: none;
+    color: black;
+    padding-top: 4px;
+  }
+
+  .header-login:hover {
+    text-decoration: underline;
+  }
+}

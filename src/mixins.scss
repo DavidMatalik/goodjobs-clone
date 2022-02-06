@@ -12,7 +12,7 @@
   }
 
   @if $breakpoint == large-tablet {
-    @media (min-width: 992px) {
+    @media (min-width: 920px) {
       @content;
     }
   }

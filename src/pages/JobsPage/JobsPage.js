@@ -1,6 +1,6 @@
 import './JobsPage.scss'
 
-function JobsPage() {
+function JobsPage({ fetchedJobs }) {
   return <div>This is the Jobspage</div>
 }
 

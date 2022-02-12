@@ -1,11 +1,11 @@
 @import '../../mixins.scss';
 
-main {
-  padding: 20px 50px 150px 0;
+.start-page-content {
+  padding: 20px 50px 150px 50px;
 
   @include respond(large-tablet) {
     padding-right: 250px;
-    padding-left: 50px;
+    padding-left: 100px;
   }
 
   h1 {

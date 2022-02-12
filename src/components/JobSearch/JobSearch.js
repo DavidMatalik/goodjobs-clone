@@ -1,24 +1,38 @@
 import { Button, TextField } from '@mui/material'
 import { useFormik } from 'formik'
-import { useNavigate } from 'react-router-dom'
+import { useLocation, useNavigate } from 'react-router-dom'
 import { getAllJobs, getMatchingJobs } from '../../services/services'
 import './JobSearch.scss'
 
-function JobSearch({ buttonTheme = 'light', setFetchedJobs }) {
+function JobSearch({
+  buttonTheme = 'light',
+  setFetchedJobs,
+  setJobSearchMatch,
+}) {
   const navigate = useNavigate()
+  const location = useLocation()
 
   const formik = useFormik({
     initialValues: {
       jobTitle: '',
     },
     onSubmit: async (values) => {
-      navigate('/jobs')
-      const matchingJobs = await getMatchingJobs(values.jobTitle)
+      if (location !== '/jobs') {
+        navigate('/jobs')
+      }
 
-      if (matchingJobs.length === 0) {
-        setFetchedJobs(await getAllJobs())
+      if (values.jobTitle === '') {
+        setJobSearchMatch(true)
+        return setFetchedJobs(await getAllJobs())
+      }
+
+      const matchingJobs = await getMatchingJobs(values.jobTitle)
+      if (matchingJobs.length >= 1) {
+        setJobSearchMatch(true)
+        return setFetchedJobs(matchingJobs)
       } else {
-        setFetchedJobs(matchingJobs)
+        setJobSearchMatch(false)
+        return setFetchedJobs(await getAllJobs())
       }
     },
   })

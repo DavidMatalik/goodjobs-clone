@@ -10,9 +10,13 @@
   src: url(./font/gordita/Gordita-Bold-Italic.otf);
 }
 
+@font-face {
+  font-family: 'Gordita-Bold';
+  src: url(./font/gordita/Gordita-Bold.otf);
+}
+
 body {
   font-family: Gordita;
-  padding: 30px 50px;
   background: no-repeat
       radial-gradient(
         circle closest-side at 58% 55%,

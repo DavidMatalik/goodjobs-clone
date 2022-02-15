@@ -21,12 +21,8 @@ function JobSearch({
         navigate('/jobs')
       }
 
-      if (values.jobTitle === '') {
-        setJobSearchMatch(true)
-        return setFetchedJobs(await getAllJobs())
-      }
-
       const matchingJobs = await getMatchingJobs(values.jobTitle)
+
       if (matchingJobs.length >= 1) {
         setJobSearchMatch(true)
         return setFetchedJobs(matchingJobs)

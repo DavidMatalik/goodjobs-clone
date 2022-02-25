@@ -6,6 +6,7 @@ import {
   query,
   where,
 } from 'firebase/firestore'
+import { getDownloadURL, getStorage, ref } from 'firebase/storage'
 
 const firebaseConfig = {
   apiKey: 'AIzaSyDSI09gcrq8q33gdtFL3DsK2vPtDa0rqC4',
@@ -42,4 +43,23 @@ export const getMatchingJobs = async (searchInput) => {
 
   const querySnapshot = await getDocs(jobQuery)
   return createJobArray(querySnapshot)
+}
+
+const storage = getStorage()
+export const getCompanyLogos = async (jobLogos) => {
+  const logoUrls = await Promise.all(
+    jobLogos.map(async (jobLogo) => {
+      const storageRef = ref(storage, `company-logos/${jobLogo.logoUrl}`)
+      const logoUrl = await getDownloadURL(storageRef)
+      return { [jobLogo.id]: logoUrl }
+    })
+  )
+
+  const formattedUrls = logoUrls.reduce((acc, cv) => {
+    const key = Object.keys(cv)[0]
+    acc[key] = cv[key]
+    return acc
+  }, {})
+
+  return formattedUrls
 }

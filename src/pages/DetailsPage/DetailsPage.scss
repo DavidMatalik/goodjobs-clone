@@ -1,0 +1,155 @@
+@import '../../mixins.scss';
+
+.job-details-page {
+  padding-bottom: 50px;
+  max-width: 1200px;
+  margin: 0 auto;
+
+  .job-detail-overview {
+    background: #efede5;
+    display: flex;
+    flex-direction: column-reverse;
+    justify-content: space-around;
+    padding: 50px 40px;
+    margin: 0 40px 0 50px;
+    border-radius: 5px;
+
+    @include respond(tablet) {
+      flex-direction: row;
+    }
+
+    .job-short-description {
+      .job-title {
+        font-size: 1.3rem;
+        line-height: 1.7rem;
+        font-family: Gordita-Bold;
+        margin-bottom: 20px;
+
+        @include respond(large-tablet) {
+          font-size: 1.5rem;
+          line-height: 2.2rem;
+        }
+      }
+
+      .job-company {
+        font-size: 1.2rem;
+        line-height: 1.5rem;
+        font-family: Gordita-Medium;
+        margin-bottom: 25px;
+
+        @include respond(large-tablet) {
+          font-size: 1.3rem;
+          line-height: 1.6rem;
+        }
+      }
+
+      .job-keywords {
+        color: #4d5c66;
+        margin-bottom: 30px;
+        line-height: 1.5rem;
+      }
+    }
+
+    .company-logo-wrapper {
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      background: white;
+      height: 90px;
+      width: 190px;
+      border-radius: 5px;
+      margin-bottom: 30px;
+
+      @include respond(tablet) {
+        margin-bottom: 0;
+      }
+
+      img {
+        width: 120px;
+      }
+    }
+  }
+
+  .job-detail-description {
+    margin: 80px 40px 0 50px;
+
+    .job-detail-paragraph {
+      margin-bottom: 50px;
+
+      h2 {
+        font-family: Gordita-Bold;
+        font-size: 1.2rem;
+        margin-bottom: 20px;
+
+        @include respond(tablet) {
+          font-size: 1.5rem;
+        }
+      }
+
+      ul {
+        list-style-type: initial;
+        margin-left: 20px;
+
+        li {
+          margin-bottom: 20px;
+          line-height: 1.4rem;
+        }
+      }
+    }
+  }
+
+  .apply-button {
+    background: #c2544e !important;
+    color: white !important;
+    border-color: #c2544e !important;
+    height: 55px;
+    width: 150px;
+    text-transform: none !important;
+    font-weight: bold !important;
+  }
+
+  .apply-button:hover {
+    background: white !important;
+    color: #c2544e !important;
+    border-color: #c2544e !important;
+  }
+
+  .bottom-button {
+    margin-left: 50px;
+  }
+}
+
+.contact-popup-title {
+  padding: 40px 0 20px 0 !important;
+  text-align: center !important;
+  font-family: Gordita-Bold !important;
+}
+
+.contact-popup-description {
+  color: black !important;
+  font-family: Gordita-Regular !important;
+  font-size: 1.2rem !important;
+  line-height: 1.5rem !important;
+  padding: 0 15px !important;
+
+  strong {
+    font-weight: bolder;
+  }
+}
+
+.contact-popup-button {
+  margin: 0 auto 40px auto !important;
+  background: black !important;
+  color: white !important;
+  border-color: black !important;
+  height: 55px !important;
+  width: 150px !important;
+  text-transform: none !important;
+  font-weight: bold !important;
+
+  &:hover {
+    background: white !important;
+    color: black !important;
+    border-color: black !important;
+  }
+}

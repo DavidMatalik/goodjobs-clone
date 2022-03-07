@@ -1,0 +1,74 @@
+@import '../../mixins.scss';
+
+.job-results {
+    background: white;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    padding: 60px 0;
+
+    .job-counter {
+      margin-bottom: 10px;
+    }
+
+    .no-matches {
+      max-width: 800px;
+      width: calc(70vw + 60px);
+      margin: 0 40px;
+      font-size: 1.3rem;
+      margin-bottom: 20px;
+    }
+
+    .job-details-link {
+        text-decoration: none;
+        color: black;
+
+        .job-result {
+            display: flex;
+            flex-direction: column;
+            padding: 0 40px 30px 40px;
+            max-width: 800px;
+            width: 70vw;
+            border: solid 1px black;
+            border-radius: 5px;
+            margin-bottom: 20px;
+            box-shadow: 5px 5px;
+
+            @include respond('tablet') {
+            flex-direction: row;
+            padding: 30px 40px;
+            }
+
+            img {
+            margin-right: 50px;
+            width: 120px;
+            height: 90px;
+            }
+
+            .job-description {
+            display: flex;
+            flex-direction: column;
+            justify-content: space-between;
+
+                .job-place {
+                    font-size: 0.8rem;
+                    color: grey;
+                    margin-bottom: 15px;
+                }
+
+                h3 {
+                    font-size: 1.2rem;
+                    line-height: 1.8rem;
+                    font-family: Gordita-Bold;
+                    margin-bottom: 10px;
+                }
+
+                .job-age {
+                    font-size: 0.8rem;
+                    color: #0dadad;
+                    margin-top: 20px;
+                }
+            }
+        }
+    }
+}

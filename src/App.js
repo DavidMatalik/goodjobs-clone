@@ -8,6 +8,7 @@ import StartPage from './pages/StartPage/StartPage'
 function App() {
   const [fetchedJobs, setFetchedJobs] = useState(null)
   const [jobSearchMatch, setJobSearchMatch] = useState(false)
+  const [selectedJob, setSelectedJob] = useState(null)
 
   return (
     <BrowserRouter>
@@ -29,10 +30,16 @@ function App() {
               setFetchedJobs={setFetchedJobs}
               jobSearchMatch={jobSearchMatch}
               setJobSearchMatch={setJobSearchMatch}
+              setSelectedJob={setSelectedJob}
             />
           }
         />
-        <Route path='/job-details' element={<DetailsPage />} />
+        <Route
+          path='/job-details'
+          element={
+            <DetailsPage fetchedJobs={fetchedJobs} selectedJob={selectedJob} />
+          }
+        />
       </Routes>
     </BrowserRouter>
   )

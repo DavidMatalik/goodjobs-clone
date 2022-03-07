@@ -4,7 +4,7 @@ import './StartPage.scss'
 
 function StartPage({ setFetchedJobs, setJobSearchMatch }) {
   return (
-    <>
+    <div className='start-page'>
       <Header />
       <main className='start-page-content'>
         <h1>Finde einen Job mit Sinn</h1>
@@ -14,7 +14,7 @@ function StartPage({ setFetchedJobs, setJobSearchMatch }) {
           setJobSearchMatch={setJobSearchMatch}
         />
       </main>
-    </>
+    </div>
   )
 }
 

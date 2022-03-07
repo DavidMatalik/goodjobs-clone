@@ -1,6 +1,16 @@
-@import '../../mixins.scss';
+.jobs-page {
 
-.jobs-page-content {
+  background: no-repeat
+  radial-gradient(
+    circle closest-side at 58% 55%,
+    rgba(240, 236, 230, 0) 0,
+    rgba(240, 236, 230, 0) 13%,
+    #f3f0ab 45%,
+    #f3f0ab 52%,
+    rgba(240, 236, 230, 0) 94%,
+    rgba(240, 236, 230, 0) 100%
+  ), no-repeat linear-gradient(45deg, #f3f0ab, white 40%, #f3f0ab 99%);
+
   h1 {
     font-size: 1.5rem;
     line-height: 2.2rem;
@@ -10,73 +20,5 @@
 
   .job-search {
     padding: 20px 50px 100px 50px;
-  }
-
-  .job-results {
-    background: white;
-    display: flex;
-    flex-direction: column;
-    align-items: center;
-    padding: 60px 0;
-
-    .job-counter {
-      margin-bottom: 10px;
-    }
-
-    .no-matches {
-      max-width: 800px;
-      width: calc(70vw + 60px);
-      margin: 0 40px;
-      font-size: 1.3rem;
-      margin-bottom: 20px;
-    }
-
-    .job-result {
-      display: flex;
-      flex-direction: column;
-      padding: 0 40px 30px 40px;
-      max-width: 800px;
-      width: 70vw;
-      border: solid 1px black;
-      border-radius: 5px;
-      margin-bottom: 20px;
-      box-shadow: 5px 5px;
-
-      @include respond('tablet') {
-        flex-direction: row;
-        padding: 30px 40px;
-      }
-
-      img {
-        margin-right: 50px;
-        width: 120px;
-        height: 90px;
-      }
-
-      .job-description {
-        display: flex;
-        flex-direction: column;
-        justify-content: space-between;
-
-        .job-place {
-          font-size: 0.8rem;
-          color: grey;
-          margin-bottom: 15px;
-        }
-
-        h3 {
-          font-size: 1.2rem;
-          line-height: 1.8rem;
-          font-family: Gordita-Bold;
-          margin-bottom: 10px;
-        }
-
-        .job-age {
-          font-size: 0.8rem;
-          color: #0dadad;
-          margin-top: 20px;
-        }
-      }
-    }
   }
 }

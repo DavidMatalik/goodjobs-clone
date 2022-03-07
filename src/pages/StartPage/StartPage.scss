@@ -1,33 +1,46 @@
 @import '../../mixins.scss';
 
-.start-page-content {
-  padding: 20px 50px 150px 50px;
+.start-page {
+  background: no-repeat
+  radial-gradient(
+    circle closest-side at 58% 55%,
+    rgba(240, 236, 230, 0) 0,
+    rgba(240, 236, 230, 0) 13%,
+    #f3f0ab 45%,
+    #f3f0ab 52%,
+    rgba(240, 236, 230, 0) 94%,
+    rgba(240, 236, 230, 0) 100%
+  ), no-repeat linear-gradient(45deg, #f3f0ab, white 40%, #f3f0ab 99%);
 
-  @include respond(large-tablet) {
-    padding-right: 250px;
-    padding-left: 100px;
-  }
-
-  h1 {
-    font-family: Gordita-Bold-Italic;
-    font-size: 2.5rem;
-    line-height: 2.8rem;
-    text-transform: uppercase;
-    margin-bottom: 20px;
+  .start-page-content {
+    padding: 20px 50px 150px 50px;
 
     @include respond(large-tablet) {
-      font-size: 5rem;
-      line-height: 5.5rem;
+      padding-right: 250px;
+      padding-left: 100px;
     }
-  }
 
-  h3 {
-    font-size: 1rem;
-    font-weight: bold;
-    margin-bottom: 60px;
+    h1 {
+      font-family: Gordita-Bold-Italic;
+      font-size: 2.5rem;
+      line-height: 2.8rem;
+      text-transform: uppercase;
+      margin-bottom: 20px;
 
-    @include respond(large-tablet) {
-      font-size: 1.2rem;
+      @include respond(large-tablet) {
+        font-size: 5rem;
+        line-height: 5.5rem;
+      }
+    }
+
+    h3 {
+      font-size: 1rem;
+      font-weight: bold;
+      margin-bottom: 60px;
+
+      @include respond(large-tablet) {
+        font-size: 1.2rem;
+      }
     }
   }
 }

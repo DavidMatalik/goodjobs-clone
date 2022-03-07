@@ -8,11 +8,10 @@ function JobsPage({
   setFetchedJobs,
   jobSearchMatch,
   setJobSearchMatch,
+  setSelectedJob,
 }) {
-
-  console.log("In JobsPage fetchedJobs", fetchedJobs)
   return (
-    <main className='jobs-page-content'>
+    <div className='jobs-page'>
       <Header />
       <section className='job-search'>
         <h1>Such dich glücklich mit GoodJobs!</h1>
@@ -21,8 +20,12 @@ function JobsPage({
           setJobSearchMatch={setJobSearchMatch}
         />
       </section>
-      <JobResult fetchedJobs={fetchedJobs} jobSearchMatch={jobSearchMatch}/>
-    </main>
+      <JobResult
+        fetchedJobs={fetchedJobs}
+        jobSearchMatch={jobSearchMatch}
+        setSelectedJob={setSelectedJob}
+      />
+    </div>
   )
 }
 

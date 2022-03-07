@@ -54,3 +54,17 @@ export const getMatchingJobs = (searchWord) => {
     }
   })
 }
+
+export const getCompanyLogos = async (jobLogos) => {
+  const logoFakeUrls = jobLogos.map((jobLogo) => {
+    return { [jobLogo.id]: 'someFakeUrl' }
+  })
+
+  const formattedlogoFakeUrls = logoFakeUrls.reduce((acc, cv) => {
+    const key = Object.keys(cv)[0]
+    acc[key] = cv[key]
+    return acc
+  }, {})
+
+  return formattedlogoFakeUrls
+}

@@ -13,7 +13,7 @@ function Header() {
           Jobs
         </Link>
       </nav>
-      <Link className='header-login' to=''>
+      <Link className='header-login' to='/login'>
         Login
       </Link>
     </header>

@@ -1,5 +1,10 @@
 import { initializeApp } from 'firebase/app'
-import { createUserWithEmailAndPassword, getAuth } from 'firebase/auth'
+import {
+  createUserWithEmailAndPassword,
+  getAuth,
+  sendPasswordResetEmail,
+  signInWithEmailAndPassword,
+} from 'firebase/auth'
 import {
   collection,
   getDocs,
@@ -71,12 +76,38 @@ export const registerNewUser = (email, password) => {
     .then((userCredential) => {
       // Signed in
       const user = userCredential.user
-      console.log(user)
       // ...
     })
     .catch((error) => {
       const errorCode = error.code
       const errorMessage = error.message
       // ..
+    })
+}
+
+export const loginUser = (email, password) => {
+  const auth = getAuth()
+  signInWithEmailAndPassword(auth, email, password)
+    .then((userCredential) => {
+      // Signed in
+      const user = userCredential.user
+      console.log(user)
+      // ...
+    })
+    .catch((error) => {
+      const errorCode = error.code
+      const errorMessage = error.message
+    })
+}
+
+export const sendResetEmail = async (email) => {
+  const auth = getAuth()
+  return sendPasswordResetEmail(auth, email)
+    .then(() => {
+      // Password reset email sent!
+      // ..
+    })
+    .catch((error) => {
+      return error
     })
 }

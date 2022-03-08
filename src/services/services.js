@@ -1,4 +1,5 @@
 import { initializeApp } from 'firebase/app'
+import { createUserWithEmailAndPassword, getAuth } from 'firebase/auth'
 import {
   collection,
   getDocs,
@@ -62,4 +63,20 @@ export const getCompanyLogos = async (jobLogos) => {
   }, {})
 
   return formattedUrls
+}
+
+export const registerNewUser = (email, password) => {
+  const auth = getAuth()
+  createUserWithEmailAndPassword(auth, email, password)
+    .then((userCredential) => {
+      // Signed in
+      const user = userCredential.user
+      console.log(user)
+      // ...
+    })
+    .catch((error) => {
+      const errorCode = error.code
+      const errorMessage = error.message
+      // ..
+    })
 }

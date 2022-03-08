@@ -3,6 +3,7 @@ import { BrowserRouter, Route, Routes } from 'react-router-dom'
 import './App.scss'
 import DetailsPage from './pages/DetailsPage/DetailsPage'
 import JobsPage from './pages/JobsPage/JobsPage'
+import RegistrationPage from './pages/RegistrationPage/RegistrationPage'
 import StartPage from './pages/StartPage/StartPage'
 
 function App() {
@@ -40,6 +41,7 @@ function App() {
             <DetailsPage fetchedJobs={fetchedJobs} selectedJob={selectedJob} />
           }
         />
+        <Route path='/register' element={<RegistrationPage />} />
       </Routes>
     </BrowserRouter>
   )

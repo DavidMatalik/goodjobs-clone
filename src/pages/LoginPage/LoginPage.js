@@ -1,16 +1,15 @@
 import { Button, TextField } from '@mui/material'
 import { useFormik } from 'formik'
 import { Link, useNavigate } from 'react-router-dom'
-import { toast } from 'react-toastify'
 import * as Yup from 'yup'
 import goodJobsLogo from '../../img/goodjobs-logo.svg'
 import { registerNewUser } from '../../services/services'
-import './RegistrationPage.scss'
+import './LoginPage.scss'
 
-function RegistrationPage() {
+function LoginPage() {
   const navigate = useNavigate()
 
-  const registerSchema = Yup.object({
+  const loginSchema = Yup.object({
     email: Yup.string().email('Ungültige E-Mail').required('E-Mail benötigt'),
     password: Yup.string()
       .required('Passwort benötigt')
@@ -18,35 +17,33 @@ function RegistrationPage() {
         /^(?=.*[a-z])(?=.*[A-Z])(?=.*[0-9])(?=.*[!@#$%^&*])(?=.{8,})/,
         'Muss 8 Zeichen, einen Großbuchstabe, einen Kleinbuchstaben, eine Zahl und ein Sonderzeichen enthalten'
       ),
-    confirmPassword: Yup.string().oneOf(
-      [Yup.ref('password'), null],
-      'Passwörter müssen gleich sein'
-    ),
   })
 
   const formik = useFormik({
     initialValues: {
       email: '',
       password: '',
-      confirmPassword: '',
     },
-    validationSchema: registerSchema,
-    onSubmit: (values) => {
+    validationSchema: loginSchema,
+    onSubmit: async (values) => {
       registerNewUser(values.email, values.password)
       navigate('/')
-      toast('Dein Account wurde erfolgreich angelegt!', {
-        position: toast.POSITION.TOP_CENTER,
-      })()
     },
   })
 
   return (
-    <main className='registration-page'>
+    <main className='login-page'>
       <Link to='/'>
         <img src={goodJobsLogo} alt='goodjobs-logo' />
       </Link>
-      <h1>Wir freuen uns auf dich. Registrier dich jetzt.</h1>
-      <form className='registration-form' onSubmit={formik.handleSubmit}>
+      <h1>
+        Willkommen zurück. <br /> Log dich ein.
+      </h1>
+      <div className='register-hint'>
+        <p>Noch keinen goodJobs Account?</p>
+        <Link to='/register'>Registrier dich jetzt</Link>
+      </div>
+      <form className='login-form' onSubmit={formik.handleSubmit}>
         <TextField
           className='email-input-field'
           name='email'
@@ -68,32 +65,17 @@ function RegistrationPage() {
           error={formik.touched.password && Boolean(formik.errors.password)}
           helperText={formik.touched.password && formik.errors.password}
         />
-        <TextField
-          className='confirm-password-input-field'
-          name='confirmPassword'
-          label='Passwort bestätigen'
-          variant='standard'
-          type='password'
-          value={formik.values.confirmPassword}
-          onChange={formik.handleChange}
-          error={
-            formik.touched.confirmPassword &&
-            Boolean(formik.errors.confirmPassword)
-          }
-          helperText={
-            formik.touched.confirmPassword && formik.errors.confirmPassword
-          }
-        />
         <Button
-          className='registration-button button-dark'
+          className='login-button button-dark'
           variant='outlined'
           type='submit'
         >
-          Register
+          Login
         </Button>
       </form>
+      <Link to='/reset-password'>Passwort vergessen?</Link>
     </main>
   )
 }
 
-export default RegistrationPage
+export default LoginPage

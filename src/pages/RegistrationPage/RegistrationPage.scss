@@ -1,0 +1,65 @@
+@import '../../mixins.scss';
+
+.registration-page {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  height: 90vh;
+  padding-top: 10vh;
+
+  img {
+    width: 200px;
+    margin-bottom: 40px;
+  }
+
+  h1 {
+    font-size: 1.5rem;
+    font-family: 'Gordita-Bold';
+    line-height: 2rem;
+    width: 300px;
+    margin-bottom: 40px;
+
+    @include respond(mobile) {
+      width: 400px;
+    }
+  }
+
+  .registration-form {
+    display: flex;
+    flex-direction: column;
+    width: 300px;
+
+    @include respond(mobile) {
+      width: 400px;
+    }
+
+    .email-input-field {
+      margin-bottom: 30px;
+    }
+
+    .password-input-field {
+      margin-bottom: 30px;
+    }
+
+    .confirm-password-input-field {
+      margin-bottom: 60px;
+    }
+
+    .registration-button {
+      margin: 0 auto 40px auto !important;
+      background: black !important;
+      color: white !important;
+      border-color: black !important;
+      height: 55px !important;
+      width: 150px !important;
+      text-transform: none !important;
+      font-weight: bold !important;
+
+      &:hover {
+        background: white !important;
+        color: black !important;
+        border-color: black !important;
+      }
+    }
+  }
+}

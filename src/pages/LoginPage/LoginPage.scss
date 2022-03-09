@@ -49,24 +49,31 @@
     .password-input-field {
       margin-bottom: 60px;
     }
+  }
 
-    .login-button {
-      margin: 0 auto 40px auto !important;
-      background: black !important;
-      color: white !important;
-      border-color: black !important;
-      height: 55px !important;
-      width: 150px !important;
-      text-transform: none !important;
-      font-weight: bold !important;
+  .login-button {
+    margin: 0 auto 40px auto !important;
+    background: black !important;
+    color: white !important;
+    border-color: black !important;
+    height: 55px !important;
+    width: 250px !important;
+    text-transform: none !important;
+    font-weight: bold !important;
 
-      &:hover {
-        background: white !important;
-        color: black !important;
-        border-color: black !important;
-      }
+    .github-logo {
+      position: relative;
+      right: 20px;
+      top: 18px;
+      width: 30px;
+    }
+
+    &:hover {
+      background: white !important;
+      color: black !important;
     }
   }
+
   a {
     font-family: 'Gordita-Bold';
     color: #1aa9a8;

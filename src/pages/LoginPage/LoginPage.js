@@ -1,13 +1,25 @@
 import { Button, TextField } from '@mui/material'
 import { useFormik } from 'formik'
+import { useEffect, useState } from 'react'
 import { Link, useNavigate } from 'react-router-dom'
 import * as Yup from 'yup'
+import githubLogoBlack from '../../img/github-logo-black.svg'
+import githubLogoWhite from '../../img/github-logo-white.svg'
 import goodJobsLogo from '../../img/goodjobs-logo.svg'
-import { registerNewUser } from '../../services/services'
+import {
+  getUserInformation,
+  loginUserWithGithub,
+  registerNewUser,
+} from '../../services/services'
 import './LoginPage.scss'
 
 function LoginPage() {
   const navigate = useNavigate()
+  const [githubLogo, setGithubLogo] = useState(githubLogoBlack)
+
+  useEffect(() => {
+    getUserInformation()
+  })
 
   const loginSchema = Yup.object({
     email: Yup.string().email('Ungültige E-Mail').required('E-Mail benötigt'),
@@ -71,6 +83,16 @@ function LoginPage() {
           type='submit'
         >
           Login
+        </Button>
+        <Button
+          className='login-button button-dark'
+          variant='outlined'
+          onClick={loginUserWithGithub}
+          onMouseEnter={() => setGithubLogo(githubLogoWhite)}
+          onMouseLeave={() => setGithubLogo(githubLogoBlack)}
+        >
+          <img className='github-logo' src={githubLogo} alt='Github Logo' />
+          Login with Github
         </Button>
       </form>
       <Link to='/reset-password'>Passwort vergessen?</Link>

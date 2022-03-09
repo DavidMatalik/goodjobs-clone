@@ -2,8 +2,11 @@ import { initializeApp } from 'firebase/app'
 import {
   createUserWithEmailAndPassword,
   getAuth,
+  getRedirectResult,
+  GithubAuthProvider,
   sendPasswordResetEmail,
   signInWithEmailAndPassword,
+  signInWithRedirect,
 } from 'firebase/auth'
 import {
   collection,
@@ -72,32 +75,35 @@ export const getCompanyLogos = async (jobLogos) => {
 
 export const registerNewUser = (email, password) => {
   const auth = getAuth()
-  createUserWithEmailAndPassword(auth, email, password)
-    .then((userCredential) => {
-      // Signed in
-      const user = userCredential.user
-      // ...
-    })
-    .catch((error) => {
-      const errorCode = error.code
-      const errorMessage = error.message
-      // ..
-    })
-}
-
-export const loginUser = (email, password) => {
-  const auth = getAuth()
-  signInWithEmailAndPassword(auth, email, password)
-    .then((userCredential) => {
+  createUserWithEmailAndPassword(auth, email, password).then(
+    (userCredential) => {
       // Signed in
       const user = userCredential.user
       console.log(user)
-      // ...
-    })
-    .catch((error) => {
-      const errorCode = error.code
-      const errorMessage = error.message
-    })
+    }
+  )
+}
+
+export const loginUserWithEmail = (email, password) => {
+  const auth = getAuth()
+  signInWithEmailAndPassword(auth, email, password).then((userCredential) => {
+    // Signed in
+    const user = userCredential.user
+    console.log(user)
+  })
+}
+
+export const loginUserWithGithub = async () => {
+  const auth = getAuth()
+  signInWithRedirect(auth, new GithubAuthProvider())
+}
+
+export const getUserInformation = () => {
+  const auth = getAuth()
+  getRedirectResult(auth).then((result) => {
+    const user = result.user
+    console.log(user)
+  })
 }
 
 export const sendResetEmail = async (email) => {
@@ -105,7 +111,6 @@ export const sendResetEmail = async (email) => {
   return sendPasswordResetEmail(auth, email)
     .then(() => {
       // Password reset email sent!
-      // ..
     })
     .catch((error) => {
       return error

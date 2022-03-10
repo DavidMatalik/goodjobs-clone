@@ -8,7 +8,7 @@ import goodJobsLogo from '../../img/goodjobs-logo.svg'
 import { registerNewUser } from '../../services/services'
 import './RegistrationPage.scss'
 
-function RegistrationPage() {
+function RegistrationPage({ setUser }) {
   const navigate = useNavigate()
 
   const registerSchema = Yup.object({
@@ -32,12 +32,24 @@ function RegistrationPage() {
       confirmPassword: '',
     },
     validationSchema: registerSchema,
-    onSubmit: (values) => {
+    onSubmit: (values, { resetForm }) => {
       registerNewUser(values.email, values.password)
-      navigate('/')
-      toast('Dein Account wurde erfolgreich angelegt!', {
-        position: toast.POSITION.TOP_CENTER,
-      })()
+        .then((userToken) => {
+          setUser(userToken)
+          navigate('/')
+          toast('Dein Account wurde erfolgreich angelegt!', {
+            position: toast.POSITION.TOP_CENTER,
+          })
+        })
+        .catch(() => {
+          resetForm()
+          toast.error(
+            'Leider gab es einen Fehler bei deinem Registrations-Versuch',
+            {
+              position: toast.POSITION.TOP_CENTER,
+            }
+          )
+        })
     },
   })
 

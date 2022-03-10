@@ -25,12 +25,12 @@ function ResetPasswordPage() {
         if (res instanceof Error) {
           toast.error('Angegebene E-Mail ist nicht hinterlegt', {
             position: toast.POSITION.TOP_CENTER,
-          })()
+          })
         } else {
           navigate('/login')
           toast('E-Mail zum Passwort zurücksetzen gesendet!', {
             position: toast.POSITION.TOP_CENTER,
-          })()
+          })
         }
       })
     },

@@ -2,6 +2,7 @@ import { TextField } from '@mui/material'
 import { useFormik } from 'formik'
 import { useEffect, useState } from 'react'
 import { Link, useNavigate } from 'react-router-dom'
+import { toast } from 'react-toastify'
 import * as Yup from 'yup'
 import GoodjobsButton from '../../components/GoodjobsButton/GoodjobsButton'
 import githubLogoBlack from '../../img/github-logo-black.svg'
@@ -9,18 +10,24 @@ import githubLogoWhite from '../../img/github-logo-white.svg'
 import goodJobsLogo from '../../img/goodjobs-logo.svg'
 import {
   getUserInformation,
+  loginUserWithEmail,
   loginUserWithGithub,
-  registerNewUser,
 } from '../../services/services'
 import './LoginPage.scss'
 
-function LoginPage() {
+function LoginPage({ setUser }) {
   const navigate = useNavigate()
   const [githubLogo, setGithubLogo] = useState(githubLogoBlack)
 
   useEffect(() => {
     getUserInformation()
-  })
+      .then((userToken) => {
+        setUser(userToken)
+      })
+      .catch((err) => {
+        console.log(err)
+      })
+  }, [])
 
   const loginSchema = Yup.object({
     email: Yup.string().email('Ungültige E-Mail').required('E-Mail benötigt'),
@@ -38,11 +45,26 @@ function LoginPage() {
       password: '',
     },
     validationSchema: loginSchema,
-    onSubmit: async (values) => {
-      registerNewUser(values.email, values.password)
-      navigate('/')
+    onSubmit: async (values, { resetForm }) => {
+      loginUserWithEmail(values.email, values.password)
+        .then((userToken) => {
+          navigate('/')
+          setUser(userToken)
+        })
+        .catch(() => {
+          resetForm()
+          toast.error('Leider gab es einen Fehler bei deinem Login-Versuch', {
+            position: toast.POSITION.TOP_CENTER,
+          })
+        })
     },
   })
+
+  const handleGithubClick = () => {
+    loginUserWithGithub().then(() => {
+      navigate('/')
+    })
+  }
 
   return (
     <main className='login-page'>
@@ -90,7 +112,7 @@ function LoginPage() {
             theme='black'
             width='250px'
             type='button'
-            onClick={loginUserWithGithub}
+            onClick={() => handleGithubClick()}
           >
             <img className='github-logo' src={githubLogo} alt='Github Logo' />
             Login with Github

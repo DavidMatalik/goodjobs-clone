@@ -1,5 +1,4 @@
 import {
-  Button,
   Dialog,
   DialogActions,
   DialogContent,
@@ -7,6 +6,7 @@ import {
   DialogTitle,
 } from '@mui/material'
 import { useState } from 'react'
+import GoodjobsButton from '../../components/GoodjobsButton/GoodjobsButton'
 import Header from '../../components/Header/Header'
 import { getJobActuality } from '../../helpers/formatting'
 import './DetailsPage.scss'
@@ -40,13 +40,9 @@ function DetailsPage({ fetchedJobs, selectedJob }) {
               (tag) => `· ${tag[0].toUpperCase()}${tag.slice(1)} `
             )}
           </p>
-          <Button
-            className='apply-button'
-            variant='outlined'
-            onClick={showContactPopup}
-          >
+          <GoodjobsButton theme='red' onClick={showContactPopup}>
             Bewerben
-          </Button>
+          </GoodjobsButton>
         </div>
         <div className='company-logo-wrapper'>
           <img src={selectedJob.logoUrl} alt='company-logo' />
@@ -66,13 +62,11 @@ function DetailsPage({ fetchedJobs, selectedJob }) {
           )
         })}
       </section>
-      <Button
-        className='apply-button bottom-button'
-        variant='outlined'
-        onClick={showContactPopup}
-      >
-        Bewerben
-      </Button>
+      <div className='bottom-button-wrapper'>
+        <GoodjobsButton theme='red' onClick={showContactPopup}>
+          Bewerben
+        </GoodjobsButton>
+      </div>
 
       <Dialog
         open={open}
@@ -95,13 +89,16 @@ function DetailsPage({ fetchedJobs, selectedJob }) {
           </DialogContentText>
         </DialogContent>
         <DialogActions>
-          <Button
+          {/* <Button
             className='contact-popup-button'
             variant='outlined'
             onClick={closeContactPopup}
           >
             Alles klar
-          </Button>
+          </Button> */}
+          <GoodjobsButton theme='black' onClick={closeContactPopup}>
+            Alles klar
+          </GoodjobsButton>
         </DialogActions>
       </Dialog>
     </div>

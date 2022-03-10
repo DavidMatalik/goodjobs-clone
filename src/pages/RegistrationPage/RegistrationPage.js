@@ -1,8 +1,9 @@
-import { Button, TextField } from '@mui/material'
+import { TextField } from '@mui/material'
 import { useFormik } from 'formik'
 import { Link, useNavigate } from 'react-router-dom'
 import { toast } from 'react-toastify'
 import * as Yup from 'yup'
+import GoodjobsButton from '../../components/GoodjobsButton/GoodjobsButton'
 import goodJobsLogo from '../../img/goodjobs-logo.svg'
 import { registerNewUser } from '../../services/services'
 import './RegistrationPage.scss'
@@ -84,13 +85,9 @@ function RegistrationPage() {
             formik.touched.confirmPassword && formik.errors.confirmPassword
           }
         />
-        <Button
-          className='registration-button button-dark'
-          variant='outlined'
-          type='submit'
-        >
+        <GoodjobsButton theme='black' type='submit'>
           Register
-        </Button>
+        </GoodjobsButton>
       </form>
     </main>
   )

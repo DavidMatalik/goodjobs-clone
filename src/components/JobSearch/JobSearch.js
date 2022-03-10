@@ -1,7 +1,8 @@
-import { Button, TextField } from '@mui/material'
+import { TextField } from '@mui/material'
 import { useFormik } from 'formik'
 import { useLocation, useNavigate } from 'react-router-dom'
 import { getAllJobs, getMatchingJobs } from '../../services/services'
+import GoodjobsButton from '../GoodjobsButton/GoodjobsButton'
 import './JobSearch.scss'
 
 function JobSearch({
@@ -43,15 +44,11 @@ function JobSearch({
         value={formik.values.jobTitle}
         onChange={formik.handleChange}
       />
-      <Button
-        className={`job-search-button button-dark ${
-          buttonTheme === 'dark' ? 'button-dark' : ''
-        }`}
-        variant='outlined'
-        type='submit'
-      >
-        Jobs finden
-      </Button>
+      <div className='search-button-wrapper'>
+        <GoodjobsButton theme='black' type='submit'>
+          Jobs finden
+        </GoodjobsButton>
+      </div>
     </form>
   )
 }

@@ -1,0 +1,28 @@
+.goodjobs-button {
+  margin: 0 auto 40px auto !important;
+  height: 55px !important;
+  text-transform: none !important;
+  font-weight: bold !important;
+}
+
+.button-black {
+  background: black !important;
+  color: white !important;
+  border-color: black !important;
+
+  &:hover {
+    background: white !important;
+    color: black !important;
+  }
+}
+
+.button-red {
+  background: #c2544e !important;
+  color: white !important;
+  border-color: #c2544e !important;
+
+  &:hover {
+    background: white !important;
+    color: #c2544e !important;
+  }
+}

@@ -1,8 +1,9 @@
-import { Button, TextField } from '@mui/material'
+import { TextField } from '@mui/material'
 import { useFormik } from 'formik'
 import { Link, useNavigate } from 'react-router-dom'
 import { toast } from 'react-toastify'
 import * as Yup from 'yup'
+import GoodjobsButton from '../../components/GoodjobsButton/GoodjobsButton'
 import goodJobsLogo from '../../img/goodjobs-logo.svg'
 import { sendResetEmail } from '../../services/services'
 import './ResetPasswordPage.scss'
@@ -55,13 +56,9 @@ function ResetPasswordPage() {
           error={formik.touched.email && Boolean(formik.errors.email)}
           helperText={formik.touched.email && formik.errors.email}
         />
-        <Button
-          className='reset-button button-dark'
-          variant='outlined'
-          type='submit'
-        >
+        <GoodjobsButton theme='black' type='submit' width='250px'>
           Passwort zurücksetzen
-        </Button>
+        </GoodjobsButton>
       </form>
     </main>
   )

@@ -50,27 +50,15 @@
       margin-bottom: 60px;
     }
   }
-
-  .login-button {
-    margin: 0 auto 40px auto !important;
-    background: black !important;
-    color: white !important;
-    border-color: black !important;
-    height: 55px !important;
-    width: 250px !important;
-    text-transform: none !important;
-    font-weight: bold !important;
+  .github-button-wrapper {
+    display: flex;
+    justify-content: center;
 
     .github-logo {
       position: relative;
       right: 20px;
       top: 18px;
       width: 30px;
-    }
-
-    &:hover {
-      background: white !important;
-      color: black !important;
     }
   }
 

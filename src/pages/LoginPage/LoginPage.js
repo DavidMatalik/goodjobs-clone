@@ -1,8 +1,9 @@
-import { Button, TextField } from '@mui/material'
+import { TextField } from '@mui/material'
 import { useFormik } from 'formik'
 import { useEffect, useState } from 'react'
 import { Link, useNavigate } from 'react-router-dom'
 import * as Yup from 'yup'
+import GoodjobsButton from '../../components/GoodjobsButton/GoodjobsButton'
 import githubLogoBlack from '../../img/github-logo-black.svg'
 import githubLogoWhite from '../../img/github-logo-white.svg'
 import goodJobsLogo from '../../img/goodjobs-logo.svg'
@@ -77,23 +78,24 @@ function LoginPage() {
           error={formik.touched.password && Boolean(formik.errors.password)}
           helperText={formik.touched.password && formik.errors.password}
         />
-        <Button
-          className='login-button button-dark'
-          variant='outlined'
-          type='submit'
-        >
+        <GoodjobsButton theme='black' width='250px' type='submit'>
           Login
-        </Button>
-        <Button
-          className='login-button button-dark'
-          variant='outlined'
-          onClick={loginUserWithGithub}
+        </GoodjobsButton>
+        <div
+          className='github-button-wrapper'
           onMouseEnter={() => setGithubLogo(githubLogoWhite)}
           onMouseLeave={() => setGithubLogo(githubLogoBlack)}
         >
-          <img className='github-logo' src={githubLogo} alt='Github Logo' />
-          Login with Github
-        </Button>
+          <GoodjobsButton
+            theme='black'
+            width='250px'
+            type='button'
+            onClick={loginUserWithGithub}
+          >
+            <img className='github-logo' src={githubLogo} alt='Github Logo' />
+            Login with Github
+          </GoodjobsButton>
+        </div>
       </form>
       <Link to='/reset-password'>Passwort vergessen?</Link>
     </main>

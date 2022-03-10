@@ -73,37 +73,48 @@ export const getCompanyLogos = async (jobLogos) => {
   return formattedUrls
 }
 
-export const registerNewUser = (email, password) => {
+export const registerNewUser = async (email, password) => {
   const auth = getAuth()
-  createUserWithEmailAndPassword(auth, email, password).then(
-    (userCredential) => {
+  return createUserWithEmailAndPassword(auth, email, password)
+    .then((userCredential) => {
       // Signed in
-      const user = userCredential.user
-      console.log(user)
-    }
-  )
+      return userCredential.user
+    })
+    .catch((err) => {
+      return Promise.reject(err)
+    })
 }
 
-export const loginUserWithEmail = (email, password) => {
+export const loginUserWithEmail = async (email, password) => {
   const auth = getAuth()
-  signInWithEmailAndPassword(auth, email, password).then((userCredential) => {
-    // Signed in
-    const user = userCredential.user
-    console.log(user)
-  })
+  return signInWithEmailAndPassword(auth, email, password)
+    .then((userCredential) => {
+      // Signed in
+      return userCredential.user
+    })
+    .catch((err) => {
+      return Promise.reject(err)
+    })
 }
 
 export const loginUserWithGithub = async () => {
   const auth = getAuth()
-  signInWithRedirect(auth, new GithubAuthProvider())
+  const provider = new GithubAuthProvider()
+  provider.setCustomParameters({
+    redirect_uri: 'https://goodjobs-c213f.web.app/',
+  })
+  return signInWithRedirect(auth, provider)
 }
 
-export const getUserInformation = () => {
+export const getUserInformation = async () => {
   const auth = getAuth()
-  getRedirectResult(auth).then((result) => {
-    const user = result.user
-    console.log(user)
-  })
+  return getRedirectResult(auth)
+    .then((result) => {
+      return result.user
+    })
+    .catch((err) => {
+      console.log(err)
+    })
 }
 
 export const sendResetEmail = async (email) => {

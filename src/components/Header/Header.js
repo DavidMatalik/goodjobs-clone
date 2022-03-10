@@ -2,7 +2,7 @@ import { Link } from 'react-router-dom'
 import goodjobsLogo from '../../img/goodjobs-logo.svg'
 import './Header.scss'
 
-function Header() {
+function Header({ user }) {
   return (
     <header>
       <nav>
@@ -13,9 +13,11 @@ function Header() {
           Jobs
         </Link>
       </nav>
-      <Link className='header-login' to='/login'>
-        Login
-      </Link>
+      {user ? null : (
+        <Link className='header-login' to='/login'>
+          Login
+        </Link>
+      )}
     </header>
   )
 }

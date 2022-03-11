@@ -52,7 +52,7 @@ function DetailsPage({ fetchedJobs, selectedJob, user, loading }) {
       <Header user={user} loading={loading} />
       <section className='job-detail-overview'>
         <div className='job-short-description'>
-          <h1 className='job-title'>{chosenJob.title}</h1>
+          <h1 className='job-title'>{chosenJob.title} </h1>
           <h3 className='job-company'>{chosenJob.company.name}</h3>
           <p className='job-keywords'>
             vor {getJobActuality(chosenJob.creationDate.seconds)} ·{' '}
@@ -65,14 +65,19 @@ function DetailsPage({ fetchedJobs, selectedJob, user, loading }) {
             Bewerben
           </GoodjobsButton>
         </div>
-        <div className='company-logo-wrapper'>
-          <img src={selectedJob.logoUrl} alt='company-logo' />
+        <div className='icons-wrapper'>
+          <div className='company-logo-wrapper'>
+            <img src={selectedJob.logoUrl} alt='company-logo' />
+          </div>
+          <div className='favorite-icon-wrapper'>
+            <img
+              className='favorite-icon'
+              onClick={() => handleFavoriteClick()}
+              src={favoriteJob ? heartIconFilled : heartIconEmpty}
+              alt='Favorit'
+            />
+          </div>
         </div>
-        <img
-          onClick={() => handleFavoriteClick()}
-          src={favoriteJob ? heartIconFilled : heartIconEmpty}
-          alt='Favorit'
-        />
       </section>
       <section className='job-detail-description'>
         {chosenJob.detailsDescription.map((details, i) => {

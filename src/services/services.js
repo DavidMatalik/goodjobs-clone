@@ -18,6 +18,7 @@ import {
   getDocs,
   getFirestore,
   query,
+  setDoc,
   updateDoc,
   where,
 } from 'firebase/firestore'
@@ -63,8 +64,12 @@ export const getMatchingJobs = async (searchInput) => {
 export const getUserFavorites = async () => {
   const auth = getAuth()
   const docRef = doc(db, 'users', auth.currentUser.uid)
-  const docSnap = await getDoc(docRef)
-  return docSnap.data().favorites
+  try {
+    const docSnap = await getDoc(docRef)
+    return docSnap.data().favorites
+  } catch {
+    setDoc(docRef, { favorites: [] })
+  }
 }
 
 export const removeUserFavorite = async (favoriteId) => {

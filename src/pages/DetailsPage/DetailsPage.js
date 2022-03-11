@@ -11,7 +11,7 @@ import Header from '../../components/Header/Header'
 import { getJobActuality } from '../../helpers/formatting'
 import './DetailsPage.scss'
 
-function DetailsPage({ fetchedJobs, selectedJob }) {
+function DetailsPage({ fetchedJobs, selectedJob, user, loading }) {
   const chosenJob = fetchedJobs.find((job) => {
     return job.id === selectedJob.id
   })
@@ -28,7 +28,7 @@ function DetailsPage({ fetchedJobs, selectedJob }) {
 
   return (
     <div className='job-details-page'>
-      <Header />
+      <Header user={user} loading={loading} />
       <section className='job-detail-overview'>
         <div className='job-short-description'>
           <h1 className='job-title'>{chosenJob.title}</h1>

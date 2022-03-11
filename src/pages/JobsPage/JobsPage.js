@@ -9,10 +9,12 @@ function JobsPage({
   jobSearchMatch,
   setJobSearchMatch,
   setSelectedJob,
+  user,
+  loading,
 }) {
   return (
     <div className='jobs-page'>
-      <Header />
+      <Header user={user} loading={loading} />
       <section className='job-search'>
         <h1>Such dich glücklich mit GoodJobs!</h1>
         <JobSearch

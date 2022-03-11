@@ -55,6 +55,8 @@ function App() {
           path='/jobs'
           element={
             <JobsPage
+              loading={loading}
+              user={user}
               fetchedJobs={fetchedJobs}
               setFetchedJobs={setFetchedJobs}
               jobSearchMatch={jobSearchMatch}
@@ -66,7 +68,12 @@ function App() {
         <Route
           path='/job-details'
           element={
-            <DetailsPage fetchedJobs={fetchedJobs} selectedJob={selectedJob} />
+            <DetailsPage
+              loading={loading}
+              user={user}
+              fetchedJobs={fetchedJobs}
+              selectedJob={selectedJob}
+            />
           }
         />
         <Route

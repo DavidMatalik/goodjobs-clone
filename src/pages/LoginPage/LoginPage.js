@@ -1,7 +1,7 @@
 import { TextField } from '@mui/material'
 import { useFormik } from 'formik'
 import { useState } from 'react'
-import { Link, useNavigate } from 'react-router-dom'
+import { Link } from 'react-router-dom'
 import { toast } from 'react-toastify'
 import * as Yup from 'yup'
 import GoodjobsButton from '../../components/GoodjobsButton/GoodjobsButton'
@@ -15,7 +15,6 @@ import {
 import './LoginPage.scss'
 
 function LoginPage() {
-  const navigate = useNavigate()
   const [githubLogo, setGithubLogo] = useState(githubLogoBlack)
 
   const loginSchema = Yup.object({
@@ -35,23 +34,17 @@ function LoginPage() {
     },
     validationSchema: loginSchema,
     onSubmit: async (values, { resetForm }) => {
-      loginUserWithEmail(values.email, values.password)
-        .then(() => {
-          navigate('/')
+      loginUserWithEmail(values.email, values.password).catch(() => {
+        resetForm()
+        toast.error('Leider gab es einen Fehler bei deinem Login-Versuch', {
+          position: toast.POSITION.TOP_CENTER,
         })
-        .catch(() => {
-          resetForm()
-          toast.error('Leider gab es einen Fehler bei deinem Login-Versuch', {
-            position: toast.POSITION.TOP_CENTER,
-          })
-        })
+      })
     },
   })
 
   const handleGithubClick = () => {
-    loginUserWithGithub().then(() => {
-      navigate('/')
-    })
+    loginUserWithGithub()
   }
 
   return (

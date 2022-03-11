@@ -1,5 +1,6 @@
 import { useEffect, useState } from 'react'
 import { Link } from 'react-router-dom'
+import { toast } from 'react-toastify'
 import goodjobsLogo from '../../img/goodjobs-logo.svg'
 import { signOutUser } from '../../services/services'
 import './Header.scss'
@@ -10,7 +11,15 @@ function Header({ user, loading }) {
   useEffect(() => {
     if (loading === false && user) {
       setUserPart(
-        <p className='header-logout' onClick={() => signOutUser()}>
+        <p
+          className='header-logout'
+          onClick={() => {
+            signOutUser()
+            toast('Tschüss, bis bald!', {
+              position: toast.POSITION.TOP_CENTER,
+            })
+          }}
+        >
           Logout
         </p>
       )

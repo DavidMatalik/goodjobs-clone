@@ -10,7 +10,7 @@ import LoginPage from './pages/LoginPage/LoginPage'
 import RegistrationPage from './pages/RegistrationPage/RegistrationPage'
 import ResetPasswordPage from './pages/ResetPasswordPage/ResetPasswordPage'
 import StartPage from './pages/StartPage/StartPage'
-import { addUserChangeListener } from './services/services'
+import { addUserChangeListener, getUserFavorites } from './services/services'
 
 function App() {
   const [fetchedJobs, setFetchedJobs] = useState(null)
@@ -21,6 +21,11 @@ function App() {
 
   useEffect(() => {
     addUserChangeListener(setUser, setLoading)
+    if (user) {
+      getUserFavorites().then((favorites) => {
+        user.favorites = favorites
+      })
+    }
   }, [user])
 
   const handleLoading = (component) => {

@@ -68,3 +68,10 @@ export const getCompanyLogos = async (jobLogos) => {
 
   return formattedlogoFakeUrls
 }
+
+export const addUserChangeListener = (setUser, setLoading) => {
+  Promise.resolve(() => {
+    setUser({ user: 'I am a user' })
+    setLoading(false)
+  })
+}

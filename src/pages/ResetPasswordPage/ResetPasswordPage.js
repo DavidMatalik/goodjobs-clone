@@ -21,18 +21,18 @@ function ResetPasswordPage() {
     },
     validationSchema: loginSchema,
     onSubmit: async (values) => {
-      sendResetEmail(values.email).then((res) => {
-        if (res instanceof Error) {
-          toast.error('Angegebene E-Mail ist nicht hinterlegt', {
-            position: toast.POSITION.TOP_CENTER,
-          })
-        } else {
+      sendResetEmail(values.email)
+        .then(() => {
           navigate('/login')
           toast('E-Mail zum Passwort zurücksetzen gesendet!', {
             position: toast.POSITION.TOP_CENTER,
           })
-        }
-      })
+        })
+        .catch(() => {
+          toast.error('Angegebene E-Mail ist nicht hinterlegt', {
+            position: toast.POSITION.TOP_CENTER,
+          })
+        })
     },
   })
 

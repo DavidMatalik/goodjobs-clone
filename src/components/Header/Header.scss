@@ -26,9 +26,20 @@ header {
     text-decoration: none;
     color: black;
     padding-top: 4px;
+
+    &:hover {
+      text-decoration: underline;
+    }
   }
 
-  .header-login:hover {
-    text-decoration: underline;
+  .header-logout {
+    text-decoration: none;
+    color: black;
+    padding-top: 4px;
+
+    &:hover {
+      text-decoration: underline;
+      cursor: pointer;
+    }
   }
 }

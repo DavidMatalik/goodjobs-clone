@@ -2,10 +2,10 @@ import Header from '../../components/Header/Header'
 import JobSearch from '../../components/JobSearch/JobSearch'
 import './StartPage.scss'
 
-function StartPage({ setFetchedJobs, setJobSearchMatch, user }) {
+function StartPage({ setFetchedJobs, setJobSearchMatch, user, loading }) {
   return (
     <div className='start-page'>
-      <Header user={user} />
+      <Header user={user} loading={loading} />
       <main className='start-page-content'>
         <h1>Finde einen Job mit Sinn</h1>
         <h3>Wir bieten dir soziale und nachhaltige Arbeit.</h3>

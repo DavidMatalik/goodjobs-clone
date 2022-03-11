@@ -1,6 +1,6 @@
 import { TextField } from '@mui/material'
 import { useFormik } from 'formik'
-import { useEffect, useState } from 'react'
+import { useState } from 'react'
 import { Link, useNavigate } from 'react-router-dom'
 import { toast } from 'react-toastify'
 import * as Yup from 'yup'
@@ -9,7 +9,6 @@ import githubLogoBlack from '../../img/github-logo-black.svg'
 import githubLogoWhite from '../../img/github-logo-white.svg'
 import goodJobsLogo from '../../img/goodjobs-logo.svg'
 import {
-  getUserInformation,
   loginUserWithEmail,
   loginUserWithGithub,
 } from '../../services/services'
@@ -18,12 +17,6 @@ import './LoginPage.scss'
 function LoginPage() {
   const navigate = useNavigate()
   const [githubLogo, setGithubLogo] = useState(githubLogoBlack)
-
-  useEffect(() => {
-    getUserInformation().catch((err) => {
-      console.log(err)
-    })
-  }, [])
 
   const loginSchema = Yup.object({
     email: Yup.string().email('Ungültige E-Mail').required('E-Mail benötigt'),

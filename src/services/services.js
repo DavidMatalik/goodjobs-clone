@@ -2,7 +2,6 @@ import { initializeApp } from 'firebase/app'
 import {
   createUserWithEmailAndPassword,
   getAuth,
-  getRedirectResult,
   GithubAuthProvider,
   onAuthStateChanged,
   sendPasswordResetEmail,
@@ -98,13 +97,6 @@ export const loginUserWithGithub = async () => {
   return signInWithRedirect(auth, provider)
 }
 
-export const getUserInformation = async () => {
-  const auth = getAuth()
-  return getRedirectResult(auth).catch((err) => {
-    console.log(err)
-  })
-}
-
 export const sendResetEmail = async (email) => {
   const auth = getAuth()
   return sendPasswordResetEmail(auth, email).catch((err) => {
@@ -117,12 +109,12 @@ export const signOutUser = async () => {
   signOut(auth)
 }
 
-export const addUserChangeListener = (user, setUser, setLoading) => {
+export const addUserChangeListener = (setUser, setLoading) => {
   const auth = getAuth()
-  onAuthStateChanged(auth, (user) => {
-    if (user) {
+  onAuthStateChanged(auth, (userToken) => {
+    if (userToken) {
       // User is signed in
-      setUser(user)
+      setUser(userToken)
     } else {
       // No user is signed in
       setUser(null)

@@ -1,3 +1,4 @@
+import { CircularProgress } from '@mui/material'
 import { useEffect, useState } from 'react'
 import { BrowserRouter, Navigate, Route, Routes } from 'react-router-dom'
 import { ToastContainer } from 'react-toastify'
@@ -19,8 +20,22 @@ function App() {
   const [loading, setLoading] = useState(true)
 
   useEffect(() => {
-    addUserChangeListener(user, setUser, setLoading)
-  }, [])
+    addUserChangeListener(setUser, setLoading)
+  }, [user])
+
+  const handleLoading = (component) => {
+    if (loading) {
+      return (
+        <div className='loading-spinner-wrapper'>
+          <CircularProgress />
+        </div>
+      )
+    } else if (user) {
+      return <Navigate replace to='/' />
+    } else {
+      return component
+    }
+  }
 
   return (
     <BrowserRouter>
@@ -56,23 +71,15 @@ function App() {
         />
         <Route
           path='/login'
-          element={
-            user ? <Navigate replace to='/' /> : <LoginPage setUser={setUser} />
-          }
+          element={handleLoading(<LoginPage setUser={setUser} />)}
         />
         <Route
           path='/register'
-          element={
-            user ? (
-              <Navigate replace to='/' />
-            ) : (
-              <RegistrationPage setUser={setUser} />
-            )
-          }
+          element={handleLoading(<RegistrationPage setUser={setUser} />)}
         />
         <Route
           path='/reset-password'
-          element={user ? <Navigate replace to='/' /> : <ResetPasswordPage />}
+          element={handleLoading(<ResetPasswordPage />)}
         />
       </Routes>
       <ToastContainer />

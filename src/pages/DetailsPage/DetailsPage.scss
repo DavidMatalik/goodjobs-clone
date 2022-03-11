@@ -23,7 +23,6 @@
         font-size: 1.3rem;
         line-height: 1.7rem;
         font-family: Gordita-Bold;
-        margin-bottom: 20px;
 
         @include respond(large-tablet) {
           font-size: 1.5rem;
@@ -50,22 +49,43 @@
       }
     }
 
-    .company-logo-wrapper {
+    .icons-wrapper {
       display: flex;
-      align-items: center;
-      justify-content: center;
-      background: white;
-      height: 90px;
-      width: 190px;
-      border-radius: 5px;
-      margin-bottom: 30px;
+      flex-direction: row-reverse;
+      justify-content: flex-end;
 
-      @include respond(tablet) {
-        margin-bottom: 0;
+      .company-logo-wrapper {
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        background: white;
+        height: 90px;
+        width: 190px;
+        border-radius: 5px;
+        margin-bottom: 30px;
+
+        @include respond(tablet) {
+          margin-bottom: 0;
+        }
+
+        img {
+          width: 120px;
+        }
       }
+      .favorite-icon-wrapper {
+        display: flex;
+        justify-content: center;
+        align-items: center;
+        height: 90px;
 
-      img {
-        width: 120px;
+        .favorite-icon {
+          width: 40px;
+          margin-right: 30px;
+
+          &:hover {
+            cursor: pointer;
+          }
+        }
       }
     }
   }

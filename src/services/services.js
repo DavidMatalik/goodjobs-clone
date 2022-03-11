@@ -10,10 +10,15 @@ import {
   signOut,
 } from 'firebase/auth'
 import {
+  arrayRemove,
+  arrayUnion,
   collection,
+  doc,
+  getDoc,
   getDocs,
   getFirestore,
   query,
+  updateDoc,
   where,
 } from 'firebase/firestore'
 import { getDownloadURL, getStorage, ref } from 'firebase/storage'
@@ -53,6 +58,29 @@ export const getMatchingJobs = async (searchInput) => {
 
   const querySnapshot = await getDocs(jobQuery)
   return createJobArray(querySnapshot)
+}
+
+export const getUserFavorites = async () => {
+  const auth = getAuth()
+  const docRef = doc(db, 'users', auth.currentUser.uid)
+  const docSnap = await getDoc(docRef)
+  return docSnap.data().favorites
+}
+
+export const removeUserFavorite = async (favoriteId) => {
+  const auth = getAuth()
+  const docRef = doc(db, 'users', auth.currentUser.uid)
+  updateDoc(docRef, {
+    favorites: arrayRemove(favoriteId),
+  })
+}
+
+export const addUserFavorite = async (favoriteId) => {
+  const auth = getAuth()
+  const docRef = doc(db, 'users', auth.currentUser.uid)
+  updateDoc(docRef, {
+    favorites: arrayUnion(favoriteId),
+  })
 }
 
 const storage = getStorage()

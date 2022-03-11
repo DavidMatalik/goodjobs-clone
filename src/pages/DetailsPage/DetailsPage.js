@@ -9,6 +9,9 @@ import { useState } from 'react'
 import GoodjobsButton from '../../components/GoodjobsButton/GoodjobsButton'
 import Header from '../../components/Header/Header'
 import { getJobActuality } from '../../helpers/formatting'
+import heartIconEmpty from '../../img/heart-empty.svg'
+import heartIconFilled from '../../img/heart-filled.svg'
+import { addUserFavorite, removeUserFavorite } from '../../services/services'
 import './DetailsPage.scss'
 
 function DetailsPage({ fetchedJobs, selectedJob, user, loading }) {
@@ -17,6 +20,14 @@ function DetailsPage({ fetchedJobs, selectedJob, user, loading }) {
   })
 
   const [open, setOpen] = useState(false)
+  const [favoriteJob, setFavoriteJob] = useState(() => {
+    if (user && user.favorites && user.favorites.length > 0) {
+      const favorite = user.favorites.find(
+        (favoriteId) => favoriteId === selectedJob.id
+      )
+      return Boolean(favorite)
+    }
+  })
 
   const showContactPopup = () => {
     setOpen(true)
@@ -24,6 +35,16 @@ function DetailsPage({ fetchedJobs, selectedJob, user, loading }) {
 
   const closeContactPopup = () => {
     setOpen(false)
+  }
+
+  const handleFavoriteClick = () => {
+    if (favoriteJob) {
+      removeUserFavorite(selectedJob.id)
+      setFavoriteJob(false)
+    } else {
+      addUserFavorite(selectedJob.id)
+      setFavoriteJob(true)
+    }
   }
 
   return (
@@ -47,6 +68,11 @@ function DetailsPage({ fetchedJobs, selectedJob, user, loading }) {
         <div className='company-logo-wrapper'>
           <img src={selectedJob.logoUrl} alt='company-logo' />
         </div>
+        <img
+          onClick={() => handleFavoriteClick()}
+          src={favoriteJob ? heartIconFilled : heartIconEmpty}
+          alt='Favorit'
+        />
       </section>
       <section className='job-detail-description'>
         {chosenJob.detailsDescription.map((details, i) => {
@@ -89,13 +115,6 @@ function DetailsPage({ fetchedJobs, selectedJob, user, loading }) {
           </DialogContentText>
         </DialogContent>
         <DialogActions>
-          {/* <Button
-            className='contact-popup-button'
-            variant='outlined'
-            onClick={closeContactPopup}
-          >
-            Alles klar
-          </Button> */}
           <GoodjobsButton theme='black' onClick={closeContactPopup}>
             Alles klar
           </GoodjobsButton>

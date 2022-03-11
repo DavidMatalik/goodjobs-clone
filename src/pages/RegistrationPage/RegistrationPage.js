@@ -34,8 +34,7 @@ function RegistrationPage({ setUser }) {
     validationSchema: registerSchema,
     onSubmit: (values, { resetForm }) => {
       registerNewUser(values.email, values.password)
-        .then((userToken) => {
-          setUser(userToken)
+        .then(() => {
           navigate('/')
           toast('Dein Account wurde erfolgreich angelegt!', {
             position: toast.POSITION.TOP_CENTER,

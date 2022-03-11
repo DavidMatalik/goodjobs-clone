@@ -1,8 +1,29 @@
+import { useEffect, useState } from 'react'
 import { Link } from 'react-router-dom'
 import goodjobsLogo from '../../img/goodjobs-logo.svg'
+import { signOutUser } from '../../services/services'
 import './Header.scss'
 
-function Header({ user }) {
+function Header({ user, loading }) {
+  const [userPart, setUserPart] = useState('')
+
+  useEffect(() => {
+    if (loading === false && user) {
+      setUserPart(
+        <p className='header-logout' onClick={() => signOutUser()}>
+          Logout
+        </p>
+      )
+    }
+    if (loading === false && !user) {
+      setUserPart(
+        <Link className='header-login' to='/login'>
+          Login
+        </Link>
+      )
+    }
+  }, [loading, user])
+
   return (
     <header>
       <nav>
@@ -13,11 +34,7 @@ function Header({ user }) {
           Jobs
         </Link>
       </nav>
-      {user ? null : (
-        <Link className='header-login' to='/login'>
-          Login
-        </Link>
-      )}
+      <div>{userPart}</div>
     </header>
   )
 }

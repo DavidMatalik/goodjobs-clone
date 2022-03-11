@@ -1,4 +1,4 @@
-import { useState } from 'react'
+import { useEffect, useState } from 'react'
 import { BrowserRouter, Navigate, Route, Routes } from 'react-router-dom'
 import { ToastContainer } from 'react-toastify'
 import 'react-toastify/dist/ReactToastify.css'
@@ -9,12 +9,18 @@ import LoginPage from './pages/LoginPage/LoginPage'
 import RegistrationPage from './pages/RegistrationPage/RegistrationPage'
 import ResetPasswordPage from './pages/ResetPasswordPage/ResetPasswordPage'
 import StartPage from './pages/StartPage/StartPage'
+import { addUserChangeListener } from './services/services'
 
 function App() {
   const [fetchedJobs, setFetchedJobs] = useState(null)
   const [jobSearchMatch, setJobSearchMatch] = useState(false)
   const [selectedJob, setSelectedJob] = useState(null)
   const [user, setUser] = useState(null)
+  const [loading, setLoading] = useState(true)
+
+  useEffect(() => {
+    addUserChangeListener(user, setUser, setLoading)
+  }, [])
 
   return (
     <BrowserRouter>
@@ -23,6 +29,7 @@ function App() {
           path='/'
           element={
             <StartPage
+              loading={loading}
               user={user}
               setFetchedJobs={setFetchedJobs}
               setJobSearchMatch={setJobSearchMatch}

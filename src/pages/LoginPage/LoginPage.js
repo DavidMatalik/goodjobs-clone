@@ -15,18 +15,14 @@ import {
 } from '../../services/services'
 import './LoginPage.scss'
 
-function LoginPage({ setUser }) {
+function LoginPage() {
   const navigate = useNavigate()
   const [githubLogo, setGithubLogo] = useState(githubLogoBlack)
 
   useEffect(() => {
-    getUserInformation()
-      .then((userToken) => {
-        setUser(userToken)
-      })
-      .catch((err) => {
-        console.log(err)
-      })
+    getUserInformation().catch((err) => {
+      console.log(err)
+    })
   }, [])
 
   const loginSchema = Yup.object({
@@ -47,9 +43,8 @@ function LoginPage({ setUser }) {
     validationSchema: loginSchema,
     onSubmit: async (values, { resetForm }) => {
       loginUserWithEmail(values.email, values.password)
-        .then((userToken) => {
+        .then(() => {
           navigate('/')
-          setUser(userToken)
         })
         .catch(() => {
           resetForm()

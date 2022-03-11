@@ -4,9 +4,11 @@ import {
   getAuth,
   getRedirectResult,
   GithubAuthProvider,
+  onAuthStateChanged,
   sendPasswordResetEmail,
   signInWithEmailAndPassword,
   signInWithRedirect,
+  signOut,
 } from 'firebase/auth'
 import {
   collection,
@@ -75,26 +77,16 @@ export const getCompanyLogos = async (jobLogos) => {
 
 export const registerNewUser = async (email, password) => {
   const auth = getAuth()
-  return createUserWithEmailAndPassword(auth, email, password)
-    .then((userCredential) => {
-      // Signed in
-      return userCredential.user
-    })
-    .catch((err) => {
-      return Promise.reject(err)
-    })
+  return createUserWithEmailAndPassword(auth, email, password).catch((err) => {
+    return Promise.reject(err)
+  })
 }
 
 export const loginUserWithEmail = async (email, password) => {
   const auth = getAuth()
-  return signInWithEmailAndPassword(auth, email, password)
-    .then((userCredential) => {
-      // Signed in
-      return userCredential.user
-    })
-    .catch((err) => {
-      return Promise.reject(err)
-    })
+  return signInWithEmailAndPassword(auth, email, password).catch((err) => {
+    return Promise.reject(err)
+  })
 }
 
 export const loginUserWithGithub = async () => {
@@ -108,22 +100,33 @@ export const loginUserWithGithub = async () => {
 
 export const getUserInformation = async () => {
   const auth = getAuth()
-  return getRedirectResult(auth)
-    .then((result) => {
-      return result.user
-    })
-    .catch((err) => {
-      console.log(err)
-    })
+  return getRedirectResult(auth).catch((err) => {
+    console.log(err)
+  })
 }
 
 export const sendResetEmail = async (email) => {
   const auth = getAuth()
-  return sendPasswordResetEmail(auth, email)
-    .then(() => {
-      // Password reset email sent!
-    })
-    .catch((error) => {
-      return error
-    })
+  return sendPasswordResetEmail(auth, email).catch((err) => {
+    return Promise.reject(err)
+  })
+}
+
+export const signOutUser = async () => {
+  const auth = getAuth()
+  signOut(auth)
+}
+
+export const addUserChangeListener = (user, setUser, setLoading) => {
+  const auth = getAuth()
+  onAuthStateChanged(auth, (user) => {
+    if (user) {
+      // User is signed in
+      setUser(user)
+    } else {
+      // No user is signed in
+      setUser(null)
+    }
+    setLoading(false)
+  })
 }

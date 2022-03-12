@@ -18,6 +18,7 @@ import {
   getDocs,
   getFirestore,
   query,
+  setDoc,
   updateDoc,
   where,
 } from 'firebase/firestore'
@@ -78,7 +79,7 @@ export const getUserFavorites = async () => {
 
     return favoriteJobs
   } catch (err) {
-    console.log(err)
+    setDoc(docRef, { favorites: [] })
   }
 }
 

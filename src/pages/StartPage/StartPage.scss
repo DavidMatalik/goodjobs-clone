@@ -46,17 +46,11 @@
       }
     }
   }
-  .start-page-favorites {
-    padding: 50px;
-    h2 {
-      font-size: 1.5rem;
-      font-family: Gordita-Bold;
-      margin-bottom: 50px;
-    }
 
-    p {
-      font-size: 1.1rem;
-      line-height: 1.4rem;
-    }
+  .no-favorites-text {
+    padding: 0 50px;
+    font-size: 1.1rem;
+    line-height: 1.4rem;
+    margin-top: -30px;
   }
 }

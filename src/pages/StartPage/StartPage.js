@@ -1,8 +1,6 @@
-import { useEffect } from 'react'
 import Header from '../../components/Header/Header'
 import JobResult from '../../components/JobResult/JobResult'
 import JobSearch from '../../components/JobSearch/JobSearch'
-import { getUserFavorites } from '../../services/services'
 import './StartPage.scss'
 
 function StartPage({
@@ -11,19 +9,9 @@ function StartPage({
   user,
   loading,
   favoriteJobs,
-  setFavoriteJobs,
   jobSearchMatch,
   setSelectedJob,
 }) {
-  useEffect(() => {
-    if (user) {
-      getUserFavorites().then((favorites) => {
-        setFavoriteJobs(favorites)
-        setFetchedJobs(favorites)
-      })
-    }
-  }, [user])
-
   return (
     <div className='start-page'>
       <div className='start-search-top-content'>
@@ -38,18 +26,20 @@ function StartPage({
         </section>
       </div>
       <section className='start-page-favorites'>
-        <h2>Deine Job-Favoriten</h2>
-        <p>
-          Bisher hast du noch keine Favoriten. Beim Anschauen der Jobs kannst du
-          auf das Herz-Symbol klicken. Dadurch speicherst du einen Job als
-          Favoriten. Durch nochmaliges Klicken auf das Herz-Symbol entfernst du
-          diesen Job wieder von deinen Job-Favoriten.
-        </p>
         <JobResult
-          fetchedJobs={favoriteJobs}
+          title='Deine Job-Favoriten'
+          jobs={favoriteJobs}
           jobSearchMatch={jobSearchMatch}
           setSelectedJob={setSelectedJob}
         />
+        {favoriteJobs && favoriteJobs.length === 0 && (
+          <p className='no-favorites-text'>
+            Bisher hast du noch keine Favoriten. Beim Anschauen der Jobs kannst
+            du auf das Herz-Symbol klicken. Dadurch speicherst du einen Job als
+            Favoriten. Durch nochmaliges Klicken auf das Herz-Symbol entfernst
+            du diesen Job wieder von deinen Job-Favoriten.
+          </p>
+        )}
       </section>
     </div>
   )

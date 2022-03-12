@@ -54,7 +54,9 @@ function DetailsPage({
       setHeart(false)
     } else {
       addUserFavoriteToDb(selectedJob.id)
-      setFavoriteJobs([...favoriteJobs, selectedJob])
+      favoriteJobs
+        ? setFavoriteJobs([...favoriteJobs, selectedJob])
+        : setFavoriteJobs([selectedJob])
       setHeart(true)
     }
   }

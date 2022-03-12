@@ -23,7 +23,8 @@ function JobsPage({
         />
       </section>
       <JobResult
-        fetchedJobs={fetchedJobs}
+        title='Job-Ergebnisse'
+        jobs={fetchedJobs}
         jobSearchMatch={jobSearchMatch}
         setSelectedJob={setSelectedJob}
       />

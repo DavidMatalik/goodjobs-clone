@@ -4,14 +4,14 @@ import { getJobActuality } from '../../helpers/formatting'
 import { getCompanyLogos } from '../../services/services'
 import './JobResult.scss'
 
-function JobResult({ fetchedJobs, jobSearchMatch, setSelectedJob }) {
+function JobResult({ title, jobs, jobSearchMatch, setSelectedJob }) {
   const [logoUrls, setlogoUrls] = useState(null)
   const [jobsOutput, setJobsOutput] = useState(null)
 
   useEffect(() => {
-    if (fetchedJobs) {
+    if (jobs) {
       const jobLogos = []
-      fetchedJobs.forEach((job) => {
+      jobs.forEach((job) => {
         jobLogos.push({ id: job.id, logoUrl: job.company.logoUrl })
       })
 
@@ -19,12 +19,12 @@ function JobResult({ fetchedJobs, jobSearchMatch, setSelectedJob }) {
         setlogoUrls(urls)
       })
     }
-  }, [fetchedJobs])
+  }, [jobs])
 
   useEffect(() => {
-    if (logoUrls) {
+    if (jobs && logoUrls) {
       setJobsOutput(
-        fetchedJobs.map((job) => {
+        jobs.map((job) => {
           return (
             <Link to='/job-details' className='job-details-link' key={job.id}>
               <div
@@ -58,22 +58,10 @@ function JobResult({ fetchedJobs, jobSearchMatch, setSelectedJob }) {
 
   return (
     <>
-      {jobsOutput && (
-        <section className='job-results'>
-          {jobSearchMatch ? (
-            <p className='job-counter'>
-              {fetchedJobs && `${fetchedJobs.length} Ergebnis`}
-              {fetchedJobs && fetchedJobs.length !== 1 ? 'se' : ''}
-            </p>
-          ) : (
-            <p className='no-matches'>
-              Wir konnten leider keine passenden Jobs für dich finden. Aber
-              vielleicht ist einer dieser Jobs interessant?
-            </p>
-          )}
-          {jobsOutput && jobsOutput}
-        </section>
-      )}
+      <section className='job-results'>
+        <h2>{title}</h2>
+        {jobsOutput && jobsOutput}
+      </section>
     </>
   )
 }

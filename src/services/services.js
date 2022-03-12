@@ -18,7 +18,6 @@ import {
   getDocs,
   getFirestore,
   query,
-  setDoc,
   updateDoc,
   where,
 } from 'firebase/firestore'
@@ -64,11 +63,22 @@ export const getMatchingJobs = async (searchInput) => {
 export const getUserFavorites = async () => {
   const auth = getAuth()
   const docRef = doc(db, 'users', auth.currentUser.uid)
+
   try {
     const docSnap = await getDoc(docRef)
-    return docSnap.data().favorites
-  } catch {
-    setDoc(docRef, { favorites: [] })
+    const favoriteJobIds = docSnap.data().favorites
+
+    const favoriteJobs = await Promise.all(
+      favoriteJobIds.map(async (jobId) => {
+        const docRef = doc(db, 'jobs', jobId)
+        const docSnap = await getDoc(docRef)
+        return docSnap.data()
+      })
+    )
+
+    return favoriteJobs
+  } catch (err) {
+    console.log(err)
   }
 }
 

@@ -31,7 +31,7 @@ function JobResult({ fetchedJobs, jobSearchMatch, setSelectedJob }) {
                 className='job-result'
                 onClick={() =>
                   setSelectedJob({
-                    id: job.id,
+                    ...job,
                     logoUrl: logoUrls[job.id],
                   })
                 }

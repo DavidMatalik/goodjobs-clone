@@ -25,10 +25,6 @@ function DetailsPage({
   favoriteJobs,
   setFavoriteJobs,
 }) {
-  const chosenJob = fetchedJobs.find((job) => {
-    return job.id === selectedJob.id
-  })
-
   const [open, setOpen] = useState(false)
   const [heart, setHeart] = useState(() => {
     if (favoriteJobs) {
@@ -66,12 +62,12 @@ function DetailsPage({
       <Header user={user} loading={loading} />
       <section className='job-detail-overview'>
         <div className='job-short-description'>
-          <h1 className='job-title'>{chosenJob.title} </h1>
-          <h3 className='job-company'>{chosenJob.company.name}</h3>
+          <h1 className='job-title'>{selectedJob.title} </h1>
+          <h3 className='job-company'>{selectedJob.company.name}</h3>
           <p className='job-keywords'>
-            vor {getJobActuality(chosenJob.creationDate.seconds)} ·{' '}
-            {chosenJob.place} {chosenJob.remote && '| Remote möglich'}{' '}
-            {chosenJob.tags.map(
+            vor {getJobActuality(selectedJob.creationDate.seconds)} ·{' '}
+            {selectedJob.place} {selectedJob.remote && '| Remote möglich'}{' '}
+            {selectedJob.tags.map(
               (tag) => `· ${tag[0].toUpperCase()}${tag.slice(1)} `
             )}
           </p>
@@ -83,18 +79,20 @@ function DetailsPage({
           <div className='company-logo-wrapper'>
             <img src={selectedJob.logoUrl} alt='company-logo' />
           </div>
-          <div className='favorite-icon-wrapper'>
-            <img
-              className='favorite-icon'
-              onClick={() => handleFavoriteClick()}
-              src={heart ? heartIconFilled : heartIconEmpty}
-              alt='Favorit'
-            />
-          </div>
+          {user && (
+            <div className='favorite-icon-wrapper'>
+              <img
+                className='favorite-icon'
+                onClick={() => handleFavoriteClick()}
+                src={heart ? heartIconFilled : heartIconEmpty}
+                alt='Favorit'
+              />
+            </div>
+          )}
         </div>
       </section>
       <section className='job-detail-description'>
-        {chosenJob.detailsDescription.map((details, i) => {
+        {selectedJob.detailsDescription.map((details, i) => {
           return (
             <div className='job-detail-paragraph' key={`${i}${details.title}`}>
               <h2>{details.title}</h2>
@@ -128,7 +126,7 @@ function DetailsPage({
             className='contact-popup-description'
           >
             Die Company, für die du dich bewerben willst, hat die E-Mail Adresse{' '}
-            <strong>{chosenJob.company.email}</strong> für Bewerbungen
+            <strong>{selectedJob.company.email}</strong> für Bewerbungen
             hinterlegt. Bewirb dich einfach direkt per E-Mail und verweise auch
             auf goodjobs dabei. Viel Erfolg!
           </DialogContentText>

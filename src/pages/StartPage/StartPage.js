@@ -1,5 +1,6 @@
 import { useEffect } from 'react'
 import Header from '../../components/Header/Header'
+import JobResult from '../../components/JobResult/JobResult'
 import JobSearch from '../../components/JobSearch/JobSearch'
 import { getUserFavorites } from '../../services/services'
 import './StartPage.scss'
@@ -11,11 +12,14 @@ function StartPage({
   loading,
   favoriteJobs,
   setFavoriteJobs,
+  jobSearchMatch,
+  setSelectedJob,
 }) {
   useEffect(() => {
     if (user) {
       getUserFavorites().then((favorites) => {
         setFavoriteJobs(favorites)
+        setFetchedJobs(favorites)
       })
     }
   }, [user])
@@ -41,10 +45,11 @@ function StartPage({
           Favoriten. Durch nochmaliges Klicken auf das Herz-Symbol entfernst du
           diesen Job wieder von deinen Job-Favoriten.
         </p>
-        {favoriteJobs &&
-          favoriteJobs.map((favoriteId) => {
-            return <p key={favoriteId}>{favoriteId}</p>
-          })}
+        <JobResult
+          fetchedJobs={favoriteJobs}
+          jobSearchMatch={jobSearchMatch}
+          setSelectedJob={setSelectedJob}
+        />
       </section>
     </div>
   )

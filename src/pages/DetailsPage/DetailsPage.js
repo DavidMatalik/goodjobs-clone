@@ -33,7 +33,7 @@ function DetailsPage({
   const [heart, setHeart] = useState(() => {
     if (favoriteJobs) {
       const favorite = favoriteJobs.find(
-        (favoriteId) => favoriteId === selectedJob.id
+        (favoriteJob) => favoriteJob.id === selectedJob.id
       )
       return Boolean(favorite)
     }
@@ -50,11 +50,11 @@ function DetailsPage({
   const handleFavoriteClick = () => {
     if (heart) {
       removeUserFavoriteFromDb(selectedJob.id)
-      setFavoriteJobs(favoriteJobs.filter((item) => item !== selectedJob.id))
+      setFavoriteJobs(favoriteJobs.filter((item) => item.id !== selectedJob.id))
       setHeart(false)
     } else {
       addUserFavoriteToDb(selectedJob.id)
-      setFavoriteJobs([...favoriteJobs, selectedJob.id])
+      setFavoriteJobs([...favoriteJobs, selectedJob])
       setHeart(true)
     }
   }

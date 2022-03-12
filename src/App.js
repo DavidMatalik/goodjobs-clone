@@ -10,7 +10,7 @@ import LoginPage from './pages/LoginPage/LoginPage'
 import RegistrationPage from './pages/RegistrationPage/RegistrationPage'
 import ResetPasswordPage from './pages/ResetPasswordPage/ResetPasswordPage'
 import StartPage from './pages/StartPage/StartPage'
-import { addUserChangeListener, getUserFavorites } from './services/services'
+import { addUserChangeListener } from './services/services'
 
 function App() {
   const [fetchedJobs, setFetchedJobs] = useState(null)
@@ -18,14 +18,10 @@ function App() {
   const [selectedJob, setSelectedJob] = useState(null)
   const [user, setUser] = useState(null)
   const [loading, setLoading] = useState(true)
+  const [favoriteJobs, setFavoriteJobs] = useState(null)
 
   useEffect(() => {
     addUserChangeListener(setUser, setLoading)
-    if (user) {
-      getUserFavorites().then((favorites) => {
-        user.favorites = favorites
-      })
-    }
   }, [user])
 
   const handleLoading = (component) => {
@@ -53,6 +49,8 @@ function App() {
               user={user}
               setFetchedJobs={setFetchedJobs}
               setJobSearchMatch={setJobSearchMatch}
+              favoriteJobs={favoriteJobs}
+              setFavoriteJobs={setFavoriteJobs}
             />
           }
         />
@@ -78,6 +76,8 @@ function App() {
               user={user}
               fetchedJobs={fetchedJobs}
               selectedJob={selectedJob}
+              favoriteJobs={favoriteJobs}
+              setFavoriteJobs={setFavoriteJobs}
             />
           }
         />

@@ -72,7 +72,7 @@ export const getUserFavorites = async () => {
   }
 }
 
-export const removeUserFavorite = async (favoriteId) => {
+export const removeUserFavoriteFromDb = async (favoriteId) => {
   const auth = getAuth()
   const docRef = doc(db, 'users', auth.currentUser.uid)
   updateDoc(docRef, {
@@ -80,7 +80,7 @@ export const removeUserFavorite = async (favoriteId) => {
   })
 }
 
-export const addUserFavorite = async (favoriteId) => {
+export const addUserFavoriteToDb = async (favoriteId) => {
   const auth = getAuth()
   const docRef = doc(db, 'users', auth.currentUser.uid)
   updateDoc(docRef, {

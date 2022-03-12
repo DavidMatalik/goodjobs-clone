@@ -11,18 +11,28 @@ import Header from '../../components/Header/Header'
 import { getJobActuality } from '../../helpers/formatting'
 import heartIconEmpty from '../../img/heart-empty.svg'
 import heartIconFilled from '../../img/heart-filled.svg'
-import { addUserFavorite, removeUserFavorite } from '../../services/services'
+import {
+  addUserFavoriteToDb,
+  removeUserFavoriteFromDb,
+} from '../../services/services'
 import './DetailsPage.scss'
 
-function DetailsPage({ fetchedJobs, selectedJob, user, loading }) {
+function DetailsPage({
+  fetchedJobs,
+  selectedJob,
+  user,
+  loading,
+  favoriteJobs,
+  setFavoriteJobs,
+}) {
   const chosenJob = fetchedJobs.find((job) => {
     return job.id === selectedJob.id
   })
 
   const [open, setOpen] = useState(false)
-  const [favoriteJob, setFavoriteJob] = useState(() => {
-    if (user && user.favorites && user.favorites.length > 0) {
-      const favorite = user.favorites.find(
+  const [heart, setHeart] = useState(() => {
+    if (favoriteJobs) {
+      const favorite = favoriteJobs.find(
         (favoriteId) => favoriteId === selectedJob.id
       )
       return Boolean(favorite)
@@ -38,12 +48,14 @@ function DetailsPage({ fetchedJobs, selectedJob, user, loading }) {
   }
 
   const handleFavoriteClick = () => {
-    if (favoriteJob) {
-      removeUserFavorite(selectedJob.id)
-      setFavoriteJob(false)
+    if (heart) {
+      removeUserFavoriteFromDb(selectedJob.id)
+      setFavoriteJobs(favoriteJobs.filter((item) => item !== selectedJob.id))
+      setHeart(false)
     } else {
-      addUserFavorite(selectedJob.id)
-      setFavoriteJob(true)
+      addUserFavoriteToDb(selectedJob.id)
+      setFavoriteJobs([...favoriteJobs, selectedJob.id])
+      setHeart(true)
     }
   }
 
@@ -73,7 +85,7 @@ function DetailsPage({ fetchedJobs, selectedJob, user, loading }) {
             <img
               className='favorite-icon'
               onClick={() => handleFavoriteClick()}
-              src={favoriteJob ? heartIconFilled : heartIconEmpty}
+              src={heart ? heartIconFilled : heartIconEmpty}
               alt='Favorit'
             />
           </div>

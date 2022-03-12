@@ -25,22 +25,24 @@ function StartPage({
           />
         </section>
       </div>
-      <section className='start-page-favorites'>
-        <JobResult
-          title='Deine Job-Favoriten'
-          jobs={favoriteJobs}
-          jobSearchMatch={jobSearchMatch}
-          setSelectedJob={setSelectedJob}
-        />
-        {favoriteJobs && favoriteJobs.length === 0 && (
-          <p className='no-favorites-text'>
-            Bisher hast du noch keine Favoriten. Beim Anschauen der Jobs kannst
-            du auf das Herz-Symbol klicken. Dadurch speicherst du einen Job als
-            Favoriten. Durch nochmaliges Klicken auf das Herz-Symbol entfernst
-            du diesen Job wieder von deinen Job-Favoriten.
-          </p>
-        )}
-      </section>
+      {user && (
+        <section className='start-page-favorites'>
+          <JobResult
+            title='Deine Job-Favoriten'
+            jobs={favoriteJobs}
+            jobSearchMatch={jobSearchMatch}
+            setSelectedJob={setSelectedJob}
+          />
+          {favoriteJobs && favoriteJobs.length === 0 && (
+            <p className='no-favorites-text'>
+              Bisher hast du noch keine Favoriten. Beim Anschauen der Jobs
+              kannst du auf das Herz-Symbol klicken. Dadurch speicherst du einen
+              Job als Favoriten. Durch nochmaliges Klicken auf das Herz-Symbol
+              entfernst du diesen Job wieder von deinen Job-Favoriten.
+            </p>
+          )}
+        </section>
+      )}
     </div>
   )
 }

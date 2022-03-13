@@ -5,11 +5,7 @@ import { getAllJobs, getMatchingJobs } from '../../services/services'
 import GoodjobsButton from '../GoodjobsButton/GoodjobsButton'
 import './JobSearch.scss'
 
-function JobSearch({
-  buttonTheme = 'light',
-  setFetchedJobs,
-  setJobSearchMatch,
-}) {
+function JobSearch({ setFetchedJobs, setJobSearchMatch }) {
   const navigate = useNavigate()
   const location = useLocation()
 

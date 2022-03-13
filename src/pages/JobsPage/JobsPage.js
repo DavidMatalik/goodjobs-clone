@@ -4,8 +4,8 @@ import JobSearch from '../../components/JobSearch/JobSearch'
 import './JobsPage.scss'
 
 function JobsPage({
-  fetchedJobs,
-  setFetchedJobs,
+  searchedJobs,
+  setSearchedJobs,
   jobSearchMatch,
   setJobSearchMatch,
   setSelectedJob,
@@ -20,14 +20,14 @@ function JobsPage({
       <section className='job-search'>
         <h1>Such dich glücklich mit GoodJobs!</h1>
         <JobSearch
-          setFetchedJobs={setFetchedJobs}
+          setSearchedJobs={setSearchedJobs}
           setJobSearchMatch={setJobSearchMatch}
         />
       </section>
       <JobResult
         title='Job-Ergebnisse'
         user={user}
-        jobs={fetchedJobs}
+        jobs={searchedJobs}
         jobSearchMatch={jobSearchMatch}
         setSelectedJob={setSelectedJob}
         favoriteJobs={favoriteJobs}

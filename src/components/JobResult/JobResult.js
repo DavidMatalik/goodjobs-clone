@@ -1,13 +1,8 @@
 import { useEffect, useState } from 'react'
 import { Link } from 'react-router-dom'
 import { getJobActuality } from '../../helpers/formatting'
-import heartIconEmpty from '../../img/heart-empty.svg'
-import heartIconFilled from '../../img/heart-filled.svg'
-import {
-  addUserFavoriteToDb,
-  getCompanyLogos,
-  removeUserFavoriteFromDb,
-} from '../../services/services'
+import { getCompanyLogos } from '../../services/services'
+import FavoriteHeart from '../FavoriteHeart/FavoriteHeart'
 import './JobResult.scss'
 
 function JobResult({
@@ -20,7 +15,6 @@ function JobResult({
 }) {
   const [logoUrls, setlogoUrls] = useState(null)
   const [jobsOutput, setJobsOutput] = useState(null)
-  const [hearts, setHearts] = useState(null)
 
   useEffect(() => {
     if (jobs) {
@@ -32,37 +26,8 @@ function JobResult({
       getCompanyLogos(jobLogos).then((urls) => {
         setlogoUrls(urls)
       })
-
-      setHearts(
-        jobs.reduce((acc, currentJob) => {
-          const isFavorite = favoriteJobs.find((favoriteJob) => {
-            return favoriteJob.id === currentJob.id
-          })
-          return { ...acc, [currentJob.id]: Boolean(isFavorite) }
-        }, {})
-      )
     }
   }, [jobs])
-
-  const toggleFavorite = (job) => {
-    if (hearts[job.id]) {
-      removeUserFavoriteFromDb(job.id)
-      setFavoriteJobs(jobs.filter((item) => item.id !== job.id))
-      setHearts({ ...hearts, [job.id]: false })
-    } else {
-      addUserFavoriteToDb(job.id)
-      favoriteJobs
-        ? setFavoriteJobs([...favoriteJobs, job])
-        : setFavoriteJobs([job])
-      setHearts({ ...hearts, [job.id]: true })
-    }
-  }
-
-  const handleHeartClick = (ev, job) => {
-    ev.stopPropagation()
-    ev.preventDefault()
-    toggleFavorite(job)
-  }
 
   useEffect(() => {
     if (jobs && logoUrls) {
@@ -97,11 +62,10 @@ function JobResult({
                 </div>
                 {user && (
                   <div className='favorite-icon-wrapper'>
-                    <img
-                      className='favorite-icon'
-                      onClick={(ev) => handleHeartClick(ev, job)}
-                      src={hearts[job.id] ? heartIconFilled : heartIconEmpty}
-                      alt='Favorit'
+                    <FavoriteHeart
+                      job={job}
+                      favoriteJobs={favoriteJobs}
+                      setFavoriteJobs={setFavoriteJobs}
                     />
                   </div>
                 )}
@@ -111,7 +75,7 @@ function JobResult({
         })
       )
     }
-  }, [logoUrls, hearts])
+  }, [logoUrls])
 
   return (
     <>

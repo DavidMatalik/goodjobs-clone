@@ -6,15 +6,10 @@ import {
   DialogTitle,
 } from '@mui/material'
 import { useState } from 'react'
+import FavoriteHeart from '../../components/FavoriteHeart/FavoriteHeart'
 import GoodjobsButton from '../../components/GoodjobsButton/GoodjobsButton'
 import Header from '../../components/Header/Header'
 import { getJobActuality } from '../../helpers/formatting'
-import heartIconEmpty from '../../img/heart-empty.svg'
-import heartIconFilled from '../../img/heart-filled.svg'
-import {
-  addUserFavoriteToDb,
-  removeUserFavoriteFromDb,
-} from '../../services/services'
 import './DetailsPage.scss'
 
 function DetailsPage({
@@ -25,14 +20,6 @@ function DetailsPage({
   setFavoriteJobs,
 }) {
   const [open, setOpen] = useState(false)
-  const [heart, setHeart] = useState(() => {
-    if (favoriteJobs) {
-      const favorite = favoriteJobs.find(
-        (favoriteJob) => favoriteJob.id === selectedJob.id
-      )
-      return Boolean(favorite)
-    }
-  })
 
   const showContactPopup = () => {
     setOpen(true)
@@ -40,20 +27,6 @@ function DetailsPage({
 
   const closeContactPopup = () => {
     setOpen(false)
-  }
-
-  const handleFavoriteClick = () => {
-    if (heart) {
-      removeUserFavoriteFromDb(selectedJob.id)
-      setFavoriteJobs(favoriteJobs.filter((item) => item.id !== selectedJob.id))
-      setHeart(false)
-    } else {
-      addUserFavoriteToDb(selectedJob.id)
-      favoriteJobs
-        ? setFavoriteJobs([...favoriteJobs, selectedJob])
-        : setFavoriteJobs([selectedJob])
-      setHeart(true)
-    }
   }
 
   return (
@@ -80,11 +53,10 @@ function DetailsPage({
           </div>
           {user && (
             <div className='favorite-icon-wrapper'>
-              <img
-                className='favorite-icon'
-                onClick={() => handleFavoriteClick()}
-                src={heart ? heartIconFilled : heartIconEmpty}
-                alt='Favorit'
+              <FavoriteHeart
+                job={selectedJob}
+                favoriteJobs={favoriteJobs}
+                setFavoriteJobs={setFavoriteJobs}
               />
             </div>
           )}

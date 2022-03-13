@@ -18,7 +18,6 @@ import {
 import './DetailsPage.scss'
 
 function DetailsPage({
-  fetchedJobs,
   selectedJob,
   user,
   loading,

@@ -11,6 +11,8 @@ function JobsPage({
   setSelectedJob,
   user,
   loading,
+  favoriteJobs,
+  setFavoriteJobs,
 }) {
   return (
     <div className='jobs-page'>
@@ -24,9 +26,12 @@ function JobsPage({
       </section>
       <JobResult
         title='Job-Ergebnisse'
+        user={user}
         jobs={fetchedJobs}
         jobSearchMatch={jobSearchMatch}
         setSelectedJob={setSelectedJob}
+        favoriteJobs={favoriteJobs}
+        setFavoriteJobs={setFavoriteJobs}
       />
     </div>
   )

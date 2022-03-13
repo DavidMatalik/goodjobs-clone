@@ -11,6 +11,7 @@ function StartPage({
   favoriteJobs,
   jobSearchMatch,
   setSelectedJob,
+  setFavoriteJobs,
 }) {
   return (
     <div className='start-page'>
@@ -63,9 +64,12 @@ function StartPage({
         <section className='start-page-favorites'>
           <JobResult
             title='Deine Job-Favoriten'
+            user={user}
             jobs={favoriteJobs}
             jobSearchMatch={jobSearchMatch}
             setSelectedJob={setSelectedJob}
+            favoriteJobs={favoriteJobs}
+            setFavoriteJobs={setFavoriteJobs}
           />
           {favoriteJobs && favoriteJobs.length === 0 && (
             <p className='no-favorites-text'>

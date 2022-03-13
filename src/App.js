@@ -72,6 +72,8 @@ function App() {
               jobSearchMatch={jobSearchMatch}
               setJobSearchMatch={setJobSearchMatch}
               setSelectedJob={setSelectedJob}
+              favoriteJobs={favoriteJobs}
+              setFavoriteJobs={setFavoriteJobs}
             />
           }
         />

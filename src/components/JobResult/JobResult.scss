@@ -33,10 +33,14 @@
         padding: 30px 40px;
       }
 
-      img {
-        margin-right: 50px;
-        width: 120px;
-        height: 90px;
+      .logo-wrapper {
+        display: flex;
+        align-items: center;
+        min-height: 80px;
+
+        img {
+          margin-right: 50px;
+        }
       }
 
       .job-description {

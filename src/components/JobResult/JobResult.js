@@ -36,7 +36,9 @@ function JobResult({ title, jobs, jobSearchMatch, setSelectedJob }) {
                   })
                 }
               >
-                <img src={logoUrls[job.id]} alt='Logo' />
+                <div className='logo-wrapper'>
+                  <img src={logoUrls[job.id]} alt='Logo' />
+                </div>
                 <div className='job-description'>
                   <p className='job-place'>
                     {job.place}

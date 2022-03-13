@@ -19,8 +19,8 @@
 
     .job-result {
       display: flex;
-      flex-direction: column;
-      padding: 0 40px 30px 40px;
+      justify-content: space-between;
+      padding: 30px 40px;
       max-width: 800px;
       width: 70vw;
       border: solid 1px black;
@@ -37,43 +37,66 @@
         left: -5px;
       }
 
-      @include respond('tablet') {
-        flex-direction: row;
-        padding: 30px 40px;
-      }
-
-      .logo-wrapper {
-        display: flex;
-        align-items: center;
-        min-height: 80px;
-
-        img {
-          margin-right: 50px;
-        }
-      }
-
-      .job-description {
+      .logo-description-wrapper {
         display: flex;
         flex-direction: column;
-        justify-content: space-between;
 
-        .job-place {
-          font-size: 0.8rem;
-          color: grey;
-          margin-bottom: 15px;
+        @include respond('tablet') {
+          flex-direction: row;
         }
 
-        h3 {
-          font-size: 1.2rem;
-          line-height: 1.8rem;
-          font-family: Gordita-Bold;
-          margin-bottom: 10px;
+        .logo-wrapper {
+          display: flex;
+          align-items: center;
+          min-height: 80px;
+
+          img {
+            margin-right: 50px;
+          }
         }
 
-        .job-age {
-          font-size: 0.8rem;
-          color: #0dadad;
-          margin-top: 20px;
+        .job-description {
+          display: flex;
+          flex-direction: column;
+          justify-content: space-between;
+
+          .job-place {
+            font-size: 0.8rem;
+            color: grey;
+            margin-bottom: 15px;
+          }
+
+          h3 {
+            font-size: 1.2rem;
+            line-height: 1.8rem;
+            font-family: Gordita-Bold;
+            margin-bottom: 10px;
+          }
+
+          .job-age {
+            font-size: 0.8rem;
+            color: #0dadad;
+            margin-top: 20px;
+          }
+        }
+      }
+
+      .favorite-icon-wrapper {
+        display: flex;
+        justify-content: center;
+        align-items: center;
+        margin-right: 10px;
+
+        @include respond('mobile') {
+          margin-right: 30px;
+        }
+
+        .favorite-icon {
+          width: 50px;
+
+          &:hover {
+            cursor: pointer;
+          }
         }
       }
     }

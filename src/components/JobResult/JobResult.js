@@ -79,19 +79,21 @@ function JobResult({
                   })
                 }
               >
-                <div className='logo-wrapper'>
-                  <img src={logoUrls[job.id]} alt='Logo' />
-                </div>
-                <div className='job-description'>
-                  <p className='job-place'>
-                    {job.place}
-                    {job.remote ? ' | Remote möglich' : ''}
-                  </p>
-                  <h3>{job.title}</h3>
-                  <p className='job-company'>{job.company.name}</p>
-                  <p className='job-age'>
-                    vor {getJobActuality(job.creationDate.seconds)}
-                  </p>
+                <div className='logo-description-wrapper'>
+                  <div className='logo-wrapper'>
+                    <img src={logoUrls[job.id]} alt='Logo' />
+                  </div>
+                  <div className='job-description'>
+                    <p className='job-place'>
+                      {job.place}
+                      {job.remote ? ' | Remote möglich' : ''}
+                    </p>
+                    <h3>{job.title}</h3>
+                    <p className='job-company'>{job.company.name}</p>
+                    <p className='job-age'>
+                      vor {getJobActuality(job.creationDate.seconds)}
+                    </p>
+                  </div>
                 </div>
                 {user && (
                   <div className='favorite-icon-wrapper'>

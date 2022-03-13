@@ -33,30 +33,35 @@ function JobResult({
         setlogoUrls(urls)
       })
 
-      console.log('Favorite Jobs', favoriteJobs)
       setHearts(
         jobs.reduce((acc, currentJob) => {
           const isFavorite = favoriteJobs.find((favoriteJob) => {
             return favoriteJob.id === currentJob.id
           })
-          return { ...acc, [currentJob.id]: isFavorite }
+          return { ...acc, [currentJob.id]: Boolean(isFavorite) }
         }, {})
       )
     }
   }, [jobs])
 
-  const handleFavoriteClick = (job) => {
+  const toggleFavorite = (job) => {
     if (hearts[job.id]) {
       removeUserFavoriteFromDb(job.id)
       setFavoriteJobs(jobs.filter((item) => item.id !== job.id))
-      setHearts({ ...hearts, [hearts[job.id]]: false })
+      setHearts({ ...hearts, [job.id]: false })
     } else {
       addUserFavoriteToDb(job.id)
       favoriteJobs
         ? setFavoriteJobs([...favoriteJobs, job])
         : setFavoriteJobs([job])
-      setHearts({ ...hearts, [hearts[job.id]]: true })
+      setHearts({ ...hearts, [job.id]: true })
     }
+  }
+
+  const handleHeartClick = (ev, job) => {
+    ev.stopPropagation()
+    ev.preventDefault()
+    toggleFavorite(job)
   }
 
   useEffect(() => {
@@ -92,7 +97,7 @@ function JobResult({
                   <div className='favorite-icon-wrapper'>
                     <img
                       className='favorite-icon'
-                      onClick={() => handleFavoriteClick(job)}
+                      onClick={(ev) => handleHeartClick(ev, job)}
                       src={hearts[job.id] ? heartIconFilled : heartIconEmpty}
                       alt='Favorit'
                     />
@@ -104,7 +109,7 @@ function JobResult({
         })
       )
     }
-  }, [logoUrls])
+  }, [logoUrls, hearts])
 
   return (
     <>

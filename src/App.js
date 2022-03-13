@@ -78,14 +78,18 @@ function App() {
         <Route
           path='/job-details'
           element={
-            <DetailsPage
-              loading={loading}
-              user={user}
-              fetchedJobs={fetchedJobs}
-              selectedJob={selectedJob}
-              favoriteJobs={favoriteJobs}
-              setFavoriteJobs={setFavoriteJobs}
-            />
+            selectedJob ? (
+              <DetailsPage
+                loading={loading}
+                user={user}
+                fetchedJobs={fetchedJobs}
+                selectedJob={selectedJob}
+                favoriteJobs={favoriteJobs}
+                setFavoriteJobs={setFavoriteJobs}
+              />
+            ) : (
+              <Navigate replace to='/' />
+            )
           }
         />
         <Route

@@ -9,7 +9,7 @@
     background: #efede5;
     display: flex;
     flex-direction: column-reverse;
-    justify-content: space-around;
+    justify-content: space-between;
     padding: 50px 40px;
     margin: 0 40px 0 50px;
     border-radius: 5px;
@@ -46,6 +46,10 @@
         color: #4d5c66;
         margin-bottom: 30px;
         line-height: 1.5rem;
+
+        @include respond(mobile) {
+          padding-right: 50px;
+        }
       }
     }
 
@@ -100,8 +104,10 @@
         font-family: Gordita-Bold;
         font-size: 1.2rem;
         margin-bottom: 20px;
+        line-height: 1.7rem;
 
         @include respond(tablet) {
+          line-height: 1.9rem;
           font-size: 1.5rem;
         }
       }

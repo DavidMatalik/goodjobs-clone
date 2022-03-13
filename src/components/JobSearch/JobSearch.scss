@@ -13,7 +13,6 @@ form {
   .job-input-field {
     margin-bottom: 30px;
     width: 250px;
-    border-bottom: 2px solid black !important;
 
     @include respond(tablet) {
       margin-bottom: 50px;

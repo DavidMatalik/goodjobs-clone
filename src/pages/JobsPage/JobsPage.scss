@@ -1,15 +1,17 @@
-.jobs-page {
+@import '../../mixins.scss';
 
+.jobs-page {
   background: no-repeat
-  radial-gradient(
-    circle closest-side at 58% 55%,
-    rgba(240, 236, 230, 0) 0,
-    rgba(240, 236, 230, 0) 13%,
-    #f3f0ab 45%,
-    #f3f0ab 52%,
-    rgba(240, 236, 230, 0) 94%,
-    rgba(240, 236, 230, 0) 100%
-  ), no-repeat linear-gradient(45deg, #f3f0ab, white 40%, #f3f0ab 99%);
+      radial-gradient(
+        circle closest-side at 58% 55%,
+        rgba(240, 236, 230, 0) 0,
+        rgba(240, 236, 230, 0) 13%,
+        #f3f0ab 45%,
+        #f3f0ab 52%,
+        rgba(240, 236, 230, 0) 94%,
+        rgba(240, 236, 230, 0) 100%
+      ),
+    no-repeat linear-gradient(45deg, #f3f0ab, white 40%, #f3f0ab 99%);
 
   h1 {
     font-size: 1.5rem;
@@ -19,6 +21,10 @@
   }
 
   .job-search {
-    padding: 20px 50px 100px 50px;
+    padding: 0 50px;
+
+    @include respond('mobile') {
+      padding: 20px 50px 100px 50px;
+    }
   }
 }

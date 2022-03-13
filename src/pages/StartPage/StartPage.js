@@ -4,7 +4,7 @@ import JobSearch from '../../components/JobSearch/JobSearch'
 import './StartPage.scss'
 
 function StartPage({
-  setFetchedJobs,
+  setSearchedJobs,
   setJobSearchMatch,
   user,
   loading,
@@ -21,7 +21,7 @@ function StartPage({
           <h1>Finde einen Job mit Sinn</h1>
           <h3>Wir bieten dir soziale und nachhaltige Arbeit.</h3>
           <JobSearch
-            setFetchedJobs={setFetchedJobs}
+            setSearchedJobs={setSearchedJobs}
             setJobSearchMatch={setJobSearchMatch}
           />
         </section>

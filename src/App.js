@@ -13,7 +13,7 @@ import StartPage from './pages/StartPage/StartPage'
 import { addUserChangeListener, getUserFavorites } from './services/services'
 
 function App() {
-  const [fetchedJobs, setFetchedJobs] = useState(null)
+  const [searchedJobs, setSearchedJobs] = useState(null)
   const [jobSearchMatch, setJobSearchMatch] = useState(false)
   const [selectedJob, setSelectedJob] = useState(null)
   const [user, setUser] = useState(null)
@@ -52,7 +52,7 @@ function App() {
             <StartPage
               loading={loading}
               user={user}
-              setFetchedJobs={setFetchedJobs}
+              setSearchedJobs={setSearchedJobs}
               setJobSearchMatch={setJobSearchMatch}
               favoriteJobs={favoriteJobs}
               setFavoriteJobs={setFavoriteJobs}
@@ -67,8 +67,8 @@ function App() {
             <JobsPage
               loading={loading}
               user={user}
-              fetchedJobs={fetchedJobs}
-              setFetchedJobs={setFetchedJobs}
+              searchedJobs={searchedJobs}
+              setSearchedJobs={setSearchedJobs}
               jobSearchMatch={jobSearchMatch}
               setJobSearchMatch={setJobSearchMatch}
               setSelectedJob={setSelectedJob}
@@ -84,7 +84,7 @@ function App() {
               <DetailsPage
                 loading={loading}
                 user={user}
-                fetchedJobs={fetchedJobs}
+                searchedJobs={searchedJobs}
                 selectedJob={selectedJob}
                 favoriteJobs={favoriteJobs}
                 setFavoriteJobs={setFavoriteJobs}

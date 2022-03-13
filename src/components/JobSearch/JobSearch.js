@@ -5,7 +5,7 @@ import { getAllJobs, getMatchingJobs } from '../../services/services'
 import GoodjobsButton from '../GoodjobsButton/GoodjobsButton'
 import './JobSearch.scss'
 
-function JobSearch({ setFetchedJobs, setJobSearchMatch }) {
+function JobSearch({ setSearchedJobs, setJobSearchMatch }) {
   const navigate = useNavigate()
   const location = useLocation()
 
@@ -22,10 +22,10 @@ function JobSearch({ setFetchedJobs, setJobSearchMatch }) {
 
       if (matchingJobs.length >= 1) {
         setJobSearchMatch(true)
-        return setFetchedJobs(matchingJobs)
+        return setSearchedJobs(matchingJobs)
       } else {
         setJobSearchMatch(false)
-        return setFetchedJobs(await getAllJobs())
+        return setSearchedJobs(await getAllJobs())
       }
     },
   })

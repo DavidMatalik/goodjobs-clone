@@ -6,7 +6,7 @@ import { createMemoryHistory } from 'history'
 import { BrowserRouter } from 'react-router-dom'
 import DetailsPage from './DetailsPage'
 
-const mockedFetchedJobs = [
+const mockedsearchedJobs = [
   {
     place: 'München',
     startDate: {
@@ -92,7 +92,7 @@ const setupDetailsPage = () => {
   render(
     <BrowserRouter history={history}>
       <DetailsPage
-        fetchedJobs={mockedFetchedJobs}
+        searchedJobs={mockedsearchedJobs}
         selectedJob={mockedSelectedJob}
       />
     </BrowserRouter>

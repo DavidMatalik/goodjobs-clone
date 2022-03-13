@@ -8,7 +8,7 @@ import goodJobsLogo from '../../img/goodjobs-logo.svg'
 import { registerNewUser } from '../../services/services'
 import './RegistrationPage.scss'
 
-function RegistrationPage({ setUser }) {
+function RegistrationPage() {
   const registerSchema = Yup.object({
     email: Yup.string().email('Ungültige E-Mail').required('E-Mail benötigt'),
     password: Yup.string()
@@ -17,10 +17,9 @@ function RegistrationPage({ setUser }) {
         /^(?=.*[a-z])(?=.*[A-Z])(?=.*[0-9])(?=.*[!@#$%^&*])(?=.{8,})/,
         'Muss 8 Zeichen, einen Großbuchstabe, einen Kleinbuchstaben, eine Zahl und ein Sonderzeichen enthalten'
       ),
-    confirmPassword: Yup.string().oneOf(
-      [Yup.ref('password'), null],
-      'Passwörter müssen gleich sein'
-    ),
+    confirmPassword: Yup.string()
+      .required('Passwort benötigt')
+      .oneOf([Yup.ref('password'), null], 'Passwörter müssen gleich sein'),
   })
 
   const formik = useFormik({

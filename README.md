@@ -2,12 +2,14 @@
 
 This project is built as a task of the Odin project. It serves to learn professional front-end development.
 
-## Goals
+## Learning outcomes
 
-- Deepen the understanding of React
-- Test the most important functionality
-- Use Firestore as a Backend as a Service
-- Style the app responsively
+- Deepened the understanding of React's inner workings
+- Tested big parts of the main functionality
+- Used Firebase as a Backend as a Service: Firestore, Auth, Storage, Hosting
+- Styled the app completely responsive
+- Created a robust Login/Registration building block
+- Handling of errors and displaying to user with toastify
 
 ### Getting Started with Create React App
 

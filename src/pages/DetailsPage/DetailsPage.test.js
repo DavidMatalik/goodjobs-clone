@@ -83,8 +83,56 @@ const mockedsearchedJobs = [
 ]
 
 const mockedSelectedJob = {
+  tags: ['vertrieb', 'sales', 'manager'],
+  startDate: {
+    seconds: 1648764000,
+    nanoseconds: 0,
+  },
+  place: 'Stuttgart',
+  remote: false,
+  company: {
+    logoUrl: 'sdfdaf',
+    name: 'GoodJobs',
+  },
+  creationDate: {
+    seconds: 1642633200,
+    nanoseconds: 0,
+  },
+  title: 'Sales Manager',
+  language: 'englisch',
   id: 'KHeqNQEDGZaUEPwxdcWc',
-  logoUrl: 'fakeLogoUrl',
+  description: 'sdfdsf',
+  detailsDescription: [
+    {
+      points: [
+        'Performancegetriebene Planung, Entwicklung, Analyse und Optimierung von Paid Ads und Kampagnen',
+        'Planung und Kontrolle deines eigenen Mediabudgets und Koordination unserer Agentur',
+        'Entwickle stetig neue Strategien und probiere sie performancegetrieben aus',
+        'Du unterstützt unsere SEO-Strategie, Content Marketing und Kampagnenentwicklung',
+        'Reporting deiner KPIs im monatlichen Performance Review',
+      ],
+      title: 'Das sind deine Aufgaben bei UpToDate',
+    },
+    {
+      points: [
+        'Mindestens 2 Jahre relevante Berufserfahrung im Bereich Marketingkommunikation bzw. bei der Betreuung von Social-Media-Kanälen und/oder im PR-Bereich',
+        'Beherrschung von Kommunikationstools aus den Feldern Layout, Social Media, Online Performance von Vorteil',
+        'Markenführung und -entwicklung interessieren dich und du verstehst eine Marke über Content in Szene zu setzen.',
+        'Du verfügst über ausgezeichnete Deutschkenntnisse, beherrschst auch die englische Sprache fließend',
+        'Ausgeprägte Kommunikationsstärke, Empathie und Teamfähigkeit',
+      ],
+      title: 'Dein Profil',
+    },
+    {
+      points: [
+        'Dein Arbeitsplatz befindet sich in unserem lichtdurchfluteten modernen Büro in einer Fabriketage im Herzen Kreuzbergs nahe dem Schlesischen Tor mit höhenverstellbaren Tischen und hochwertigen ergonomischen Bürostühlen. Flexibles Arbeiten im Home-Office und flexible Arbeitszeiten sind ebenso möglich. ',
+        'Zahlreiche kulinarische Optionen laden zudem zum gemeinsamen Lunch ein oder du nutzt einfach unsere voll ausgestattete Küche um dich selbst zu versorgen. ',
+        'Wir sind alle leidenschaftliche Radfahrer:innen, sodass du dich immer auch einer Feierabendrunde anschließen kannst oder dein Commute hat bereits ausreichend Kilometer, dann findest du Duschen und Schränke um dich frisch zu machen. ',
+        'Zudem erwarten dich tolle Konditionen für Bike-Parts und attraktive Partnerprogramme. In unserer Werkstatt wird auch dein Rad ein gern gesehener Gast um gewartet und repariert zu werden.',
+      ],
+      title: 'Wir bieten Dir',
+    },
+  ],
 }
 
 const setupDetailsPage = () => {
